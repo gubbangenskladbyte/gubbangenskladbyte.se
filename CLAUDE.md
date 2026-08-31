@@ -140,7 +140,8 @@ OAuth-appen. Kräver miljövariablerna `GITHUB_OAUTH_CLIENT_ID` och
 
 ## Repo-läge
 
-Repot ligger just nu under ett privat GitHub-konto och flyttas till en
-egen organisation före go-live — se README.md, avsnittet
-"Repo-ägarskap: dev vs. produktion", för vad som måste uppdateras då
-(`static/admin/config.yml`, OAuth-app, Cloudflare Pages-källa, env-vars).
+Repot är flyttat till organisationen `gubbangenskladbyte`
+(`github.com/gubbangenskladbyte/gubbangenskladbyte.se`). `repo:` i
+`static/admin/config.yml` pekar redan dit. Kvarstår: OAuth-app under
+organisationen, Cloudflare Pages-projekt mot org-repot, env-vars — se
+README.md, avsnittet "Repo-ägarskap: dev vs. produktion".

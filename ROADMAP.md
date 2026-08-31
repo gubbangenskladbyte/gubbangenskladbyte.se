@@ -7,14 +7,14 @@ så statusen är synlig oavsett vilken maskin/session man jobbar från.
 ## Nu / Next
 
 **Nu:** Grundscaffold + fullständig innehållsmigrering (inkl. bilder)
-är committat och pushat till `main` (commit `c3d18b0`). Header/footer
-finslipade mot originaldesignen. Inget deployat till Cloudflare Pages
-än.
+är committat och pushat. Header/footer finslipade mot originaldesignen.
+Repot är flyttat till organisationen `gubbangenskladbyte`. Inget
+deployat till Cloudflare Pages än.
 
 **Next:**
-1. Skapa GitHub OAuth App (dev, under `dvalfrid`-kontot) och testa
-   `/admin/`-inloggning mot en Cloudflare Pages-preview.
-2. Sätt upp Cloudflare Pages-projektet mot detta repo.
+1. Skapa GitHub OAuth App under `gubbangenskladbyte`-organisationen.
+2. Sätt upp Cloudflare Pages-projektet mot
+   `gubbangenskladbyte/gubbangenskladbyte.se`.
 3. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
    (se "Innehåll" nedan).
 
@@ -69,12 +69,12 @@ finslipade mot originaldesignen. Inget deployat till Cloudflare Pages
       WordPress.coms inställningar)
 
 ### Repo-ägarskap (dev → produktion)
-- [ ] Repo flyttat till egen GitHub-organisation
+- [x] Repo flyttat till egen GitHub-organisation
+      (`gubbangenskladbyte/gubbangenskladbyte.se`)
+- [x] `repo:` i `static/admin/config.yml` uppdaterad till org-repot
 - [ ] Ny GitHub OAuth App under organisationen
 - [ ] Cloudflare Pages ompekad mot org-repot
 - [ ] Env-vars uppdaterade till den nya OAuth-appen
-- [ ] `repo:` i `static/admin/config.yml` uppdaterad till
-      `<organisation>/gubbangenskladbyte.se`
 - [ ] Redaktörernas skrivbehörighet verifierad i org-repot
 
 Se README.md, avsnittet "Repo-ägarskap: dev vs. produktion", för

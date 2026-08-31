@@ -75,32 +75,27 @@ Callback-URL:en måste matcha exakt vad som står hårdkodat i
 
 ## Repo-ägarskap: dev vs. produktion
 
-Precis som suhf.se ligger detta repo just nu under ett **privat
-GitHub-konto** (`dvalfrid`) som en utvecklingsmiljö. Innan sajten går
-live på riktigt ska repot flyttas till en **egen GitHub-organisation**.
-Behandla inget i den här listan som klart förrän flytten är gjord.
+Repot låg tidigare under ett privat GitHub-konto (`dvalfrid`) som
+utvecklingsmiljö, precis som suhf.se gjorde innan sin flytt. Det är
+**redan flyttat** till organisationen **`gubbangenskladbyte`** —
+repot bor nu på `github.com/gubbangenskladbyte/gubbangenskladbyte.se`.
 
-Checklista vid flytt till organisation:
+Kvarstående steg innan sajten är skarp:
 
-1. **Flytta/transferera repot** till organisationen (GitHub stödjer
-   repo-transfer utan att historik eller issues går förlorade).
-2. **Skapa en ny GitHub OAuth App under organisationen** — OAuth Apps är
-   knutna till ett konto, en app under ett privat användarkonto kan inte
-   "flyttas" till en org. Samma Homepage URL/callback URL som ovan.
-3. **Uppdatera Cloudflare Pages källa** till det nya org-repot (nytt
-   Pages-projekt, eller uppdatera det befintliga projektets kopplade
-   repo om Cloudflare stödjer det för er plan).
-4. **Sätt om miljövariablerna** `GITHUB_OAUTH_CLIENT_ID` /
-   `GITHUB_OAUTH_CLIENT_SECRET` i Cloudflare Pages till värdena från den
-   nya OAuth-appen (steg 2).
-5. **Uppdatera `repo:` i `static/admin/config.yml`** till
-   `<organisation>/gubbangenskladbyte.se`.
-6. **Ge redaktörerna skrivbehörighet** i det nya org-repot (de behövde
-   det i det gamla repot också, men GitHub-behörigheter följer inte med
-   automatiskt vid en transfer om de las till som outside collaborators).
-7. Verifiera att inloggning via `/admin/` fungerar mot den nya
-   konfigurationen innan ni pekar om DNS för `gubbangenskladbyte.se` på
-   riktigt.
+1. ~~Flytta/transferera repot till organisationen~~ — klart.
+2. **Skapa en GitHub OAuth App under organisationen** — OAuth Apps är
+   knutna till ett konto; en app skapad under `dvalfrid` gäller inte
+   automatiskt för org-repot. Samma Homepage URL/callback URL som ovan.
+3. **Sätt upp Cloudflare Pages-projektet** mot org-repot
+   (`gubbangenskladbyte/gubbangenskladbyte.se`).
+4. **Sätt miljövariablerna** `GITHUB_OAUTH_CLIENT_ID` /
+   `GITHUB_OAUTH_CLIENT_SECRET` i Cloudflare Pages till värdena från
+   OAuth-appen (steg 2).
+5. ~~Uppdatera `repo:` i `static/admin/config.yml`~~ — klart, pekar på
+   `gubbangenskladbyte/gubbangenskladbyte.se`.
+6. **Ge redaktörerna skrivbehörighet** i org-repot.
+7. Verifiera att inloggning via `/admin/` fungerar innan ni pekar om
+   DNS för `gubbangenskladbyte.se` på riktigt.
 
 ## Bokning
 

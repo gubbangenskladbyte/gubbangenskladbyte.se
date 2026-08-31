@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: dvalfrid/gubbangenskladbyte.se
+  repo: gubbangenskladbyte/gubbangenskladbyte.se
   branch: main
   base_url: https://gubbangenskladbyte.se
   auth_endpoint: /api/auth
