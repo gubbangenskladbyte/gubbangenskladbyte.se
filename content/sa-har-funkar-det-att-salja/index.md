@@ -20,7 +20,7 @@ För den som är intresserad av att sälja kläder/saker på våra storlekssorte
 
 **Välkommen med ditt mejl till:** [gubbangenskladbyte@gmail.com](mailto:gubbangenskladbyte@gmail.com)
 
-<img src="humanbridge-1.jpg" alt="Human Bridge" class="inline-img inline-img--right" loading="lazy">
+{{< bild src="humanbridge-1.jpg" alt="Human Bridge" storlek="liten" position="höger" >}}
 
 Det finns möjlighet att "kryssa" plagg och saker — det innebär att om de inte blir sålda så skänks de istället till välgörande ändamål. Vi är otroligt glada och stolta över vårt samarbete med Human Bridge, som hämtar allt som skänks av säljarna i samband med klädbytet. Läs mer på [humanbridge.se](http://www.humanbridge.se).
 

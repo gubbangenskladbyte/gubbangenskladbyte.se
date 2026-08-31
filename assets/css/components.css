@@ -191,15 +191,36 @@
   margin-top: var(--space-4);
 }
 
-/* inline images embedded in markdown body */
-.inline-img {
+/* bild-shortcode */
+.bild {
   border-radius: var(--radius);
 }
 
-.inline-img--right {
+.bild--small {
+  width: 8rem;
+}
+
+.bild--medium {
+  width: 16rem;
+}
+
+.bild--large {
+  width: 100%;
+}
+
+.bild--left {
+  float: left;
+  margin: 0 var(--space-4) var(--space-3) 0;
+}
+
+.bild--right {
   float: right;
-  width: 10rem;
   margin: 0 0 var(--space-3) var(--space-4);
+}
+
+.bild--center {
+  display: block;
+  margin: var(--space-4) auto;
 }
 
 /* quotes row */

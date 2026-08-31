@@ -91,11 +91,46 @@ Domänfält som förekommer:
 - `varukategorier` — endast på startsidan, lista med produktkategorier.
 - `ingress` — kort ingresstext, endast på startsidan.
 - `bilder` — valfri lista med bilder på sidor/inlägg (widget i Sveltia
-  CMS för att kunna ladda upp bilder till bundlen); layouterna använder
-  inte fältet direkt utan plockar upp alla bildresurser i bundlen.
+  CMS för att kunna ladda upp bilder till bundlen). Varje post kan ha
+  ett `bildtext`-fält (bildtext/figcaption). Layouterna använder inte
+  `src` direkt för att avgöra vad som visas — de plockar upp alla
+  bildresurser i bundlen automatiskt (`partial "galleri.html"`,
+  se nedan) — men slår upp `bildtext` via `src` som nyckel för att sätta
+  rätt figcaption på rätt bild.
+- `citat` / `citatperson` — valfritt pull-quote (endast `bli-medarbetare`
+  och `for-saljare` just nu), renderas i samma rutnät som bildgalleriet
+  via `partial "galleri.html"`.
 
 **`draft: true/false` är enda publiceringsmekanismen.** Ingen extra
 schemaläggnings- eller statuslogik ovanpå.
+
+## `bild`-shortcode
+
+För enskilda bilder inline i brödtext (storlek + position + eventuell
+textflytning) — separat från det automatiska bildgalleriet ovan, som
+alltid visar alla bundle-bilder i ett rutnät utan positionskontroll.
+
+```
+{{< bild src="filnamn.jpg" storlek="liten" position="höger" alt="Alt-text" >}}
+```
+
+- `storlek`: `liten` (8rem) / `medium` (16rem, standard) / `stor` (100%)
+- `position`: `vänster` / `center` (standard) / `höger` — vänster/höger
+  floatar bilden så text flyter runt den, center gör den till ett
+  centrerat block
+- `src` matchas mot en bildresurs i sidans egen page bundle via
+  `.Page.Resources.GetMatch` — samma bundle-princip som `bilder`-fältet
+- Kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan satt) —
+  shortcoden själv renderar ren `<img>`, men samma inställning tillåter
+  även rå HTML i markdown-body rent generellt (används t.ex. för
+  `<div class="quotes">`-blocket på `sa-har-funkar-det-att-salja`)
+- Om `src` inte matchar någon bundle-resurs: `warnf` i byggloggen
+  (icke-fatalt, bygget fortsätter, bilden visas bara inte) — inte
+  `errorf`, för att en redaktörs felstavade filnamn inte ska kunna
+  fälla hela deployen
+
+CSS-klasserna (`.bild`, `.bild--small/medium/large`,
+`.bild--left/center/right`) ligger i `assets/css/components.css`.
 
 ## Länkkonvention
 

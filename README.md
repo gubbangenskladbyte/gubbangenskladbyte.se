@@ -28,6 +28,24 @@ Cloudflare Pages vid varje push till `main`.
 Bilder laddas upp direkt i respektive sid-/inläggseditor och hamnar
 automatiskt tillsammans med sidans övriga filer.
 
+### Styra storlek och placering på en bild i löptexten
+
+Vanliga bilder som laddas upp i editorn visas i full bredd. Vill du
+istället ha en mindre bild som texten flyter runt (som Human
+Bridge-loggan på "Så här funkar det att sälja"), växla till
+markdown/raw-läget i textredigeraren och skriv:
+
+```
+{{< bild src="filnamn.jpg" storlek="liten" position="höger" alt="Beskrivning" >}}
+```
+
+- `storlek`: `liten`, `medium` (standard) eller `stor`
+- `position`: `vänster`, `center` (standard) eller `höger` — vänster
+  och höger gör att texten flyter runt bilden, center centrerar den
+  fristående
+- `src` måste vara filnamnet på en bild som redan laddats upp till
+  samma sida/inlägg (samma bundle)
+
 ## För utvecklare: köra sajten lokalt
 
 Kräver [Hugo Extended](https://gohugo.io/installation/) (0.150+).
