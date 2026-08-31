@@ -6,8 +6,10 @@ så statusen är synlig oavsett vilken maskin/session man jobbar från.
 
 ## Nu / Next
 
-**Nu:** Grundscaffold (Hugo-sajt, innehåll, bilder, Sveltia CMS-config,
-OAuth-proxy, dokumentation) är på plats i repot. Inget deployat än.
+**Nu:** Grundscaffold + fullständig innehållsmigrering (inkl. bilder)
+är committat och pushat till `main` (commit `c3d18b0`). Header/footer
+finslipade mot originaldesignen. Inget deployat till Cloudflare Pages
+än.
 
 **Next:**
 1. Skapa GitHub OAuth App (dev, under `dvalfrid`-kontot) och testa
