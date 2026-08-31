@@ -1,0 +1,12 @@
+{{ define "main" }}
+<article class="page">
+  <h1 class="page__title">{{ .Title }}</h1>
+  <div class="page__body">
+    {{ .Content }}
+  </div>
+
+  {{ $images := .Resources.ByType "image" }}
+  {{ $team := where $images "Name" "not in" (slice "etikett1.jpg" "etikett-1.jpg") }}
+  {{ partial "galleri.html" (dict "page" . "images" $team) }}
+</article>
+{{ end }}

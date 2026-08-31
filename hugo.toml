@@ -1,0 +1,49 @@
+baseURL = "https://gubbangenskladbyte.se/"
+locale = "sv-SE"
+title = "Gubbängens Barnklädesbyte"
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[params]
+  description = "Gubbängens Barnklädesbyte är en ideell secondhand-loppis för barnkläder och barnsaker i södra Stockholm, arrangerad två gånger om året sedan 1978."
+  epost = "gubbangenskladbyte@gmail.com"
+  facebook = "https://www.facebook.com/kladbyteigubbangen"
+  instagram = "https://www.instagram.com/gubbangens_barnkladesbyte/"
+  adress = "Gubbängsskolan, Gubbängsvägen 63"
+
+[menu]
+  [[menu.main]]
+    name = "Så här funkar det att sälja"
+    pageRef = "/sa-har-funkar-det-att-salja"
+    weight = 10
+  [[menu.main]]
+    name = "Bli medarbetare"
+    pageRef = "/bli-medarbetare"
+    weight = 20
+  [[menu.main]]
+    name = "För säljare"
+    pageRef = "/for-saljare"
+    weight = 30
+  [[menu.main]]
+    name = "Blogg"
+    pageRef = "/blogg"
+    weight = 40
+  [[menu.main]]
+    name = "Om oss"
+    pageRef = "/om-oss"
+    weight = 50
+  [[menu.main]]
+    name = "Boka shoppingtid"
+    pageRef = "/boka-shoppingtid"
+    weight = 60
+
+[markup.goldmark.renderer]
+  unsafe = true

@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="{{ "/" | relURL }}">
+      <img class="site-header__logo" src="{{ "logga.png" | relURL }}" alt="" loading="eager">
+      <span class="site-header__name">{{ .Site.Title }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Huvudmeny">
+      <ul class="site-nav__list">
+        {{ range .Site.Menus.main }}
+        <li class="site-nav__item">
+          <a class="site-nav__link" href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+</header>

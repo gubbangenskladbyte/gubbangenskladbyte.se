@@ -1,0 +1,138 @@
+backend:
+  name: github
+  repo: dvalfrid/gubbangenskladbyte.se
+  branch: main
+  base_url: https://gubbangenskladbyte.se
+  auth_endpoint: /api/auth
+
+site_url: https://gubbangenskladbyte.se
+display_url: https://gubbangenskladbyte.se
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+i18n:
+  structure: single_file
+  locales: [sv]
+  default_locale: sv
+
+collections:
+  - name: "startsida"
+    label: "Startsida"
+    editor:
+      preview: false
+    files:
+      - name: "startsida"
+        label: "Startsida"
+        file: "content/_index.md"
+        media_folder: ""
+        public_folder: ""
+        fields:
+          - { label: "Titel", name: "title", widget: "string", i18n: false }
+          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
+          - { label: "Ingress", name: "ingress", widget: "text", required: false, i18n: false }
+          - label: "Varukategorier"
+            name: "varukategorier"
+            widget: "list"
+            i18n: false
+            field: { label: "Kategori", name: "kategori", widget: "string" }
+          - label: "Bilder"
+            name: "bilder"
+            widget: "list"
+            required: false
+            i18n: false
+            fields:
+              - { label: "Bild", name: "src", widget: "image" }
+              - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
+          - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
+
+  - name: "sidor"
+    label: "Sidor"
+    editor:
+      preview: false
+    files:
+      - name: "sa-har-funkar-det-att-salja"
+        label: "Så här funkar det att sälja"
+        file: "content/sa-har-funkar-det-att-salja/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields: &sidfalt
+          - { label: "Titel", name: "title", widget: "string", i18n: false }
+          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
+          - label: "Bilder"
+            name: "bilder"
+            widget: "list"
+            required: false
+            i18n: false
+            fields:
+              - { label: "Bild", name: "src", widget: "image" }
+              - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
+          - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
+      - name: "bli-medarbetare"
+        label: "Bli medarbetare"
+        file: "content/bli-medarbetare/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields:
+          - { label: "Titel", name: "title", widget: "string", i18n: false }
+          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
+          - label: "Bilder"
+            name: "bilder"
+            widget: "list"
+            required: false
+            i18n: false
+            fields:
+              - { label: "Bild", name: "src", widget: "image" }
+              - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
+          - { label: "Citat", name: "citat", widget: "text", required: false, i18n: false }
+          - { label: "Citat — person", name: "citatperson", widget: "string", required: false, i18n: false }
+          - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
+      - name: "om-oss"
+        label: "Om oss"
+        file: "content/om-oss/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields: *sidfalt
+      - name: "kontakta-oss"
+        label: "Kontakta oss"
+        file: "content/kontakta-oss/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields: *sidfalt
+      - name: "boka-shoppingtid"
+        label: "Boka shoppingtid"
+        file: "content/boka-shoppingtid/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields:
+          - { label: "Titel", name: "title", widget: "string", i18n: false }
+          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
+          - { label: "Bokningslänk (alf.io)", name: "bokningsurl", widget: "string", required: false, i18n: false }
+          - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
+
+  - name: "blogg"
+    label: "Blogg"
+    folder: "content/blogg"
+    create: true
+    slug: "{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Titel", name: "title", widget: "string", i18n: false }
+      - { label: "Datum", name: "date", widget: "datetime", i18n: false }
+      - { label: "Publicerad", name: "draft", widget: "boolean", default: true, i18n: false }
+      - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
+      - label: "Bilder"
+        name: "bilder"
+        widget: "list"
+        required: false
+        i18n: false
+        fields:
+          - { label: "Bild", name: "src", widget: "image" }
+          - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
+      - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }

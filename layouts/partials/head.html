@@ -1,0 +1,28 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  {{ $description := .Description | default .Site.Params.description }}
+  <meta name="description" content="{{ $description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+
+  {{ with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+  {{ end }}
+
+  {{ $tokens := resources.Get "css/tokens.css" }}
+  {{ $main := resources.Get "css/main.css" }}
+  {{ $components := resources.Get "css/components.css" }}
+  {{ $css := slice $tokens $main $components | resources.Concat "css/site.css" }}
+  {{ if hugo.IsProduction }}
+    {{ $css = $css | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ else }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{ end }}
+</head>

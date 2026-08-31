@@ -1,0 +1,43 @@
+{{ define "main" }}
+<h1 class="visually-hidden">{{ .Title }}</h1>
+
+{{ with .Resources.GetMatch "gubbis1.jpg" }}
+{{ $banner := .Fill "1600x480 Center" }}
+<div class="banner">
+  <img class="banner__img" src="{{ $banner.RelPermalink }}" width="{{ $banner.Width }}" height="{{ $banner.Height }}" alt="">
+</div>
+{{ end }}
+
+<section class="intro">
+  {{ with .Params.ingress }}<p class="hero__ingress">{{ . }}</p>{{ end }}
+  {{ .Content }}
+</section>
+
+<section class="varor-row">
+  {{ with .Params.varukategorier }}
+  <div class="varor">
+    <h2 class="varor__heading">Vad kan du hitta hos oss?</h2>
+    <ul class="varor__list">
+      {{ range . }}<li class="varor__item">{{ . }}</li>{{ end }}
+    </ul>
+  </div>
+  {{ end }}
+  {{ with .Resources.GetMatch "gubbis2.jpg" }}
+  <div class="varor-row__image">
+    <img src="{{ .RelPermalink }}" alt="" loading="lazy">
+  </div>
+  {{ end }}
+</section>
+
+{{ $images := .Resources.ByType "image" }}
+{{ $extra := where $images "Name" "not in" (slice "gubbis1.jpg" "gubbis2.jpg") }}
+{{ with $extra }}
+<section class="galleri">
+  <div class="galleri__grid">
+    {{ range . }}
+    <img class="galleri__img" src="{{ .RelPermalink }}" alt="" loading="lazy">
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}

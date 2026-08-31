@@ -1,0 +1,2 @@
+{{- $manader := slice "januari" "februari" "mars" "april" "maj" "juni" "juli" "augusti" "september" "oktober" "november" "december" -}}
+{{- printf "%d %s %d" .Day (index $manader (sub .Month 1)) .Year -}}

@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="page">
+  <h1 class="page__title">{{ .Title }}</h1>
+  <div class="page__body">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.bokningsurl }}
+  <p class="page__cta">
+    <a class="btn btn--primary" href="{{ . }}">Boka shoppingtid</a>
+  </p>
+  {{ end }}
+
+  {{ partial "galleri.html" (dict "page" . "images" (.Resources.ByType "image")) }}
+</article>
+{{ end }}

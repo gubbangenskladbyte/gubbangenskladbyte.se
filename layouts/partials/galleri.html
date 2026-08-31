@@ -1,0 +1,23 @@
+{{ $page := .page }}
+{{ $images := .images }}
+{{ if or $images $page.Params.citat }}
+<div class="galleri__grid">
+  {{ range $images }}
+  {{ $img := . }}
+  {{ $caption := "" }}
+  {{ range $page.Params.bilder }}
+    {{ if eq .src $img.Name }}{{ $caption = .bildtext }}{{ end }}
+  {{ end }}
+  <figure class="galleri__item">
+    <img class="galleri__img" src="{{ $img.RelPermalink }}" alt="" loading="lazy">
+    {{ with $caption }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{ end }}
+  {{ with $page.Params.citat }}
+  <blockquote class="galleri__quote">
+    <p>{{ . }}</p>
+    {{ with $page.Params.citatperson }}<cite>{{ . }}</cite>{{ end }}
+  </blockquote>
+  {{ end }}
+</div>
+{{ end }}

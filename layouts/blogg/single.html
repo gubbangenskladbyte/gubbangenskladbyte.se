@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="post">
+  <p class="post__date">{{ partial "svensk-datum.html" .Date }}</p>
+  <h1 class="post__title">{{ .Title }}</h1>
+  <div class="post__body">
+    {{ .Content }}
+  </div>
+
+  {{ $images := .Resources.ByType "image" }}
+  {{ with $images }}
+  <div class="galleri__grid">
+    {{ range . }}
+    <img class="galleri__img" src="{{ .RelPermalink }}" alt="" loading="lazy">
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <p class="post__back"><a href="{{ "/blogg/" | relURL }}">&larr; Tillbaka till bloggen</a></p>
+</article>
+{{ end }}

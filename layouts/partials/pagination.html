@@ -1,0 +1,21 @@
+{{ if gt .Paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Sidnumrering">
+  <ul class="pagination__list">
+    {{ if .Paginator.HasPrev }}
+    <li><a class="pagination__link" href="{{ .Paginator.Prev.URL }}" aria-label="Föregående sida">&laquo; Föregående</a></li>
+    {{ end }}
+    {{ range .Paginator.Pagers }}
+    <li>
+      {{ if eq .PageNumber $.Paginator.PageNumber }}
+      <span class="pagination__link pagination__link--current" aria-current="page">{{ .PageNumber }}</span>
+      {{ else }}
+      <a class="pagination__link" href="{{ .URL }}">{{ .PageNumber }}</a>
+      {{ end }}
+    </li>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+    <li><a class="pagination__link" href="{{ .Paginator.Next.URL }}" aria-label="Nästa sida">Nästa &raquo;</a></li>
+    {{ end }}
+  </ul>
+</nav>
+{{ end }}
