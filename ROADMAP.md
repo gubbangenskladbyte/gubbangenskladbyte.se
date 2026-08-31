@@ -6,16 +6,17 @@ så statusen är synlig oavsett vilken maskin/session man jobbar från.
 
 ## Nu / Next
 
-**Nu:** Grundscaffold + fullständig innehållsmigrering (inkl. bilder)
-är committat och pushat. Header/footer finslipade mot originaldesignen.
-Repot är flyttat till organisationen `gubbangenskladbyte`. Inget
-deployat till Cloudflare Pages än.
+**Nu:** Repot flyttat till organisationen `gubbangenskladbyte`,
+GitHub OAuth App skapad, Cloudflare Pages-projekt skapat och kopplat
+till org-repot med första lyckade deploy (`gubbangenskladbyte-se.pages.dev`).
 
 **Next:**
-1. Skapa GitHub OAuth App under `gubbangenskladbyte`-organisationen.
-2. Sätt upp Cloudflare Pages-projektet mot
-   `gubbangenskladbyte/gubbangenskladbyte.se`.
-3. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
+1. Koppla riktig domän (`gubbangenskladbyte.se`) till Pages-projektet
+   och peka DNS dit — OAuth-inloggningen i `/admin/` fungerar inte
+   förrän dess (`redirect_uri` är hårdkodad till produktionsdomänen).
+2. Testa `/admin/`-inloggning end-to-end när domänen är kopplad.
+3. Sätt upp `bokning.gubbangenskladbyte.se` (alf.io).
+4. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
    (se "Innehåll" nedan).
 
 ## Status
@@ -46,16 +47,19 @@ deployat till Cloudflare Pages än.
 
 ### Sveltia CMS
 - [x] `static/admin/config.yml` speglar innehållsmodellen
-- [ ] GitHub OAuth App skapad (dev)
-- [ ] Inloggning i `/admin/` testad end-to-end mot en riktig deploy
+- [x] GitHub OAuth App skapad under `gubbangenskladbyte`-organisationen
+- [ ] Inloggning i `/admin/` testad end-to-end (kräver riktig domän,
+      se Domän-sektionen)
 
 ### Cloudflare Pages
-- [ ] Pages-projekt skapat, kopplat till repot
-- [ ] Build-konfiguration satt (`hugo --minify`, output `public`,
-      `HUGO_VERSION`)
-- [ ] `GITHUB_OAUTH_CLIENT_ID`/`GITHUB_OAUTH_CLIENT_SECRET` satta som
+- [x] Pages-projekt skapat, kopplat till `gubbangenskladbyte/gubbangenskladbyte.se`
+- [x] Build-konfiguration satt (`hugo --minify`, output `public`,
+      `HUGO_VERSION=0.165.0`)
+- [x] `GITHUB_OAUTH_CLIENT_ID`/`GITHUB_OAUTH_CLIENT_SECRET` satta som
       env-vars
-- [ ] Första lyckade deploy verifierad
+- [x] Första lyckade deploy verifierad — `gubbangenskladbyte-se.pages.dev`,
+      Hugo-bygget (29 sidor) och OAuth-proxyn (`functions/`) kompilerades
+      och deployades utan fel
 
 ### Bokning (extern, alf.io)
 - [ ] `bokning.gubbangenskladbyte.se` uppsatt och driftsatt (utanför
@@ -72,9 +76,10 @@ deployat till Cloudflare Pages än.
 - [x] Repo flyttat till egen GitHub-organisation
       (`gubbangenskladbyte/gubbangenskladbyte.se`)
 - [x] `repo:` i `static/admin/config.yml` uppdaterad till org-repot
-- [ ] Ny GitHub OAuth App under organisationen
-- [ ] Cloudflare Pages ompekad mot org-repot
-- [ ] Env-vars uppdaterade till den nya OAuth-appen
+- [x] Ny GitHub OAuth App under organisationen
+- [x] Cloudflare Pages kopplat mot org-repot (eget Cloudflare-konto,
+      `Admin@gubbangenskladbyte.se`)
+- [x] Env-vars satta till OAuth-appens värden
 - [ ] Redaktörernas skrivbehörighet verifierad i org-repot
 
 Se README.md, avsnittet "Repo-ägarskap: dev vs. produktion", för
