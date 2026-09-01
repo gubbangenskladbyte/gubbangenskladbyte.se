@@ -6,18 +6,19 @@ så statusen är synlig oavsett vilken maskin/session man jobbar från.
 
 ## Nu / Next
 
-**Nu:** Repot flyttat till organisationen `gubbangenskladbyte`,
-GitHub OAuth App skapad, Cloudflare Pages-projekt skapat och kopplat
-till org-repot med första lyckade deploy (`gubbangenskladbyte-se.pages.dev`).
+**Nu:** Sajten är **live på `https://gubbangenskladbyte.se`** —
+verifierat (giltigt SSL, rätt innehåll, canonical-URL:er pekar rätt).
+`/admin/`-inloggningen (GitHub OAuth via `functions/api/auth.js` +
+`callback.js`) är testad end-to-end av redaktör och fungerar. Hela
+deploy-kedjan (repo → Cloudflare Pages → domän → CMS-inloggning) är
+därmed i drift.
 
 **Next:**
-1. Koppla riktig domän (`gubbangenskladbyte.se`) till Pages-projektet
-   och peka DNS dit — OAuth-inloggningen i `/admin/` fungerar inte
-   förrän dess (`redirect_uri` är hårdkodad till produktionsdomänen).
-2. Testa `/admin/`-inloggning end-to-end när domänen är kopplad.
-3. Sätt upp `bokning.gubbangenskladbyte.se` (alf.io).
-4. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
+1. Ge redaktörerna skrivbehörighet i org-repot (om inte redan gjort).
+2. Sätt upp `bokning.gubbangenskladbyte.se` (alf.io).
+3. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
    (se "Innehåll" nedan).
+4. Avsluta/redirecta gamla wordpress.com-sajten när ni är redo.
 
 ## Status
 
@@ -48,8 +49,7 @@ till org-repot med första lyckade deploy (`gubbangenskladbyte-se.pages.dev`).
 ### Sveltia CMS
 - [x] `static/admin/config.yml` speglar innehållsmodellen
 - [x] GitHub OAuth App skapad under `gubbangenskladbyte`-organisationen
-- [ ] Inloggning i `/admin/` testad end-to-end (kräver riktig domän,
-      se Domän-sektionen)
+- [x] Inloggning i `/admin/` testad end-to-end — fungerar
 
 ### Cloudflare Pages
 - [x] Pages-projekt skapat, kopplat till `gubbangenskladbyte/gubbangenskladbyte.se`
@@ -68,7 +68,15 @@ till org-repot med första lyckade deploy (`gubbangenskladbyte-se.pages.dev`).
       instans
 
 ### Domän
-- [ ] DNS för `gubbangenskladbyte.se` pekad mot Cloudflare Pages
+- [x] Domänen tillagd i Cloudflare (Connect, inte Transfer —
+      registreringen är oförändrad hos nuvarande registrar)
+- [x] ProtonMail DKIM-CNAME satt till DNS only (var felaktigt Proxied
+      vid import, hade annars brutit e-postautentiseringen)
+- [x] Nameserver-byte propagerat, domänen Active i Cloudflare
+- [x] `gubbangenskladbyte.se` kopplad som Custom Domain på
+      Pages-projektet
+- [x] DNS för `gubbangenskladbyte.se` pekad mot Cloudflare Pages —
+      live, giltigt SSL, verifierat
 - [ ] Gammal wordpress.com-sajt avslutad/redirectad (om möjligt via
       WordPress.coms inställningar)
 
