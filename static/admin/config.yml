@@ -7,7 +7,7 @@ backend:
 
 site_url: https://gubbangenskladbyte.se
 display_url: https://gubbangenskladbyte.se
-app_title: Gubbängens Barnklädesbyte CMS
+app_title: Gubbängensklädbyte
 
 logo:
   src: /favicon.png
