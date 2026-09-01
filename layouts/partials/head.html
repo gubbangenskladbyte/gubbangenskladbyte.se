@@ -5,6 +5,8 @@
   {{ $description := .Description | default .Site.Params.description }}
   <meta name="description" content="{{ $description }}">
   <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png">
+  <link rel="apple-touch-icon" href="{{ "favicon.png" | relURL }}">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">

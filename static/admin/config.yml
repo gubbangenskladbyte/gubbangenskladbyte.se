@@ -8,6 +8,10 @@ backend:
 site_url: https://gubbangenskladbyte.se
 display_url: https://gubbangenskladbyte.se
 
+logo:
+  src: /favicon.png
+  show_in_header: true
+
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
