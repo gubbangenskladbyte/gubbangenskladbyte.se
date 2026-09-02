@@ -229,8 +229,8 @@
   display: inline-block;
   vertical-align: top;
   width: 100%;
-  max-width: 18rem;
-  margin: 0 var(--space-4) var(--space-4) 0;
+  max-width: 15rem;
+  margin: 0 var(--space-3) var(--space-4) 0;
   padding-left: var(--space-3);
   border-left: 3px solid var(--color-accent);
   font-style: italic;
