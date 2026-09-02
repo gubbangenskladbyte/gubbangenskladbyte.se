@@ -2,6 +2,7 @@ baseURL = "https://gubbangenskladbyte.se/"
 locale = "sv-SE"
 title = "Gubbängens Barnklädesbyte"
 enableRobotsTXT = true
+timeZone = "Europe/Stockholm"
 
 [pagination]
   pagerSize = 10
