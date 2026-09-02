@@ -5,8 +5,7 @@
     {{ .Content }}
   </div>
 
-  {{ $images := .Resources.ByType "image" }}
-  {{ $team := where $images "Name" "not in" (slice "etikett1.jpg" "etikett-1.jpg") }}
-  {{ partial "galleri.html" (dict "page" . "images" $team) }}
+  {{ $team := where .Params.bilder "src" "not in" (slice "etikett1.jpg" "etikett-1.jpg") }}
+  {{ partial "galleri.html" (dict "page" . "bilder" $team) }}
 </article>
 {{ end }}

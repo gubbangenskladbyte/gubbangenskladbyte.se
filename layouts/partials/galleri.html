@@ -1,17 +1,21 @@
 {{ $page := .page }}
-{{ $images := .images }}
-{{ if or $images $page.Params.citat }}
+{{ $bilder := .bilder }}
+{{ if or $bilder $page.Params.citat }}
 <div class="galleri__grid">
-  {{ range $images }}
-  {{ $img := . }}
-  {{ $caption := "" }}
-  {{ range $page.Params.bilder }}
-    {{ if eq .src $img.Name }}{{ $caption = .bildtext }}{{ end }}
+  {{ range $bilder }}
+  {{ $src := .src }}
+  {{ $url := "" }}
+  {{ if or (hasPrefix $src "http://") (hasPrefix $src "https://") }}
+    {{ $url = $src }}
+  {{ else }}
+    {{ with $page.Resources.GetMatch $src }}{{ $url = .RelPermalink }}{{ end }}
   {{ end }}
+  {{ if $url }}
   <figure class="galleri__item">
-    <img class="galleri__img" src="{{ $img.RelPermalink }}" alt="" loading="lazy">
-    {{ with $caption }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
+    <img class="galleri__img" src="{{ $url }}" alt="" loading="lazy">
+    {{ with .bildtext }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
   </figure>
+  {{ end }}
   {{ end }}
   {{ with $page.Params.citat }}
   <blockquote class="galleri__quote">

@@ -6,14 +6,7 @@
     {{ .Content }}
   </div>
 
-  {{ $images := .Resources.ByType "image" }}
-  {{ with $images }}
-  <div class="galleri__grid">
-    {{ range . }}
-    <img class="galleri__img" src="{{ .RelPermalink }}" alt="" loading="lazy">
-    {{ end }}
-  </div>
-  {{ end }}
+  {{ partial "galleri.html" (dict "page" . "bilder" .Params.bilder) }}
 
   <p class="post__back"><a href="{{ "/blogg/" | relURL }}">&larr; Tillbaka till bloggen</a></p>
 </article>
