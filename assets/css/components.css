@@ -168,7 +168,8 @@
   text-align: center;
 }
 
-.page__body::after {
+.page__body::after,
+.post__body::after {
   content: "";
   display: table;
   clear: both;
