@@ -10,7 +10,9 @@
 
 <section class="intro">
   {{ with .Params.ingress }}<p class="hero__ingress">{{ . }}</p>{{ end }}
-  {{ .Content }}
+  <div class="page__body">
+    {{ .Content }}
+  </div>
 </section>
 
 <section class="varor-row">
