@@ -9,8 +9,15 @@
 {{ $storlek := index $storlekar $storlekIn | default "medium" }}
 {{ $position := index $positioner $positionIn | default "center" }}
 
-{{ with .Page.Resources.GetMatch $src }}
-<img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="bild bild--{{ $storlek }} bild--{{ $position }}" loading="lazy">
+{{ $url := "" }}
+{{ if or (hasPrefix $src "http://") (hasPrefix $src "https://") }}
+  {{ $url = $src }}
+{{ else }}
+  {{ with .Page.Resources.GetMatch $src }}{{ $url = .RelPermalink }}{{ end }}
+{{ end }}
+
+{{ if $url }}
+<img src="{{ $url }}" alt="{{ $alt }}" class="bild bild--{{ $storlek }} bild--{{ $position }}" loading="lazy">
 {{ else }}
 {{ warnf "bild-shortcode: hittar ingen bildresurs som matchar %q på sidan %q" $src $.Page.File.Path }}
 {{ end }}

@@ -110,19 +110,32 @@ centrerade — det är sajtens stilval, inget du behöver tänka på.
 
 Vanliga bilder som laddas upp i Bilder-fältet visas i galleriet i full
 bredd (se ovan). Vill du istället ha en mindre bild som texten flyter
-runt, mitt i brödtexten, växla till markdown/raw-läget i
-textredigeraren och skriv:
+runt, mitt i brödtexten, klicka på knappen **"Bild (storlek/position)"**
+i verktygsfältet ovanför **Innehåll**-fältet. Ett formulär öppnas där
+du:
+
+- laddar upp (eller väljer) bilden,
+- skriver en alt-text (beskrivning för skärmläsare),
+- väljer **Storlek**: `liten`, `medium` (standard) eller `stor`,
+- väljer **Position**: `vänster`, `center` (standard) eller `höger` —
+  vänster och höger gör att texten flyter runt bilden, center centrerar
+  den fristående.
+
+Bilden infogas där markören stod. Klicka på den infogade bilden igen
+för att ändra storlek/position senare.
+
+<details>
+<summary>För utvecklare: vad knappen genererar</summary>
 
 ```
-{{< bild src="filnamn.jpg" storlek="liten" position="höger" alt="Beskrivning" >}}
+{{< bild src="filnamn.jpg" alt="Beskrivning" storlek="liten" position="höger" >}}
 ```
 
-- `storlek`: `liten`, `medium` (standard) eller `stor`
-- `position`: `vänster`, `center` (standard) eller `höger` — vänster
-  och höger gör att texten flyter runt bilden, center centrerar den
-  fristående
-- `src` måste vara filnamnet på en bild som redan laddats upp till
-  samma sida/inlägg (samma Bilder-fält)
+Registrerad som en Sveltia CMS "Editor Component" i
+`static/admin/index.html`, renderas av `layouts/shortcodes/bild.html`.
+`src` kan vara antingen ett bundle-relativt filnamn eller en extern
+URL.
+</details>
 
 ### Spara och publicera
 

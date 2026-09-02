@@ -7,5 +7,38 @@
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  <script>
+    window.CMS.registerEditorComponent({
+      id: 'bild',
+      label: 'Bild (storlek/position)',
+      icon: 'photo',
+      fields: [
+        { name: 'src', label: 'Bild', widget: 'image' },
+        { name: 'alt', label: 'Alt-text', widget: 'string', required: false, default: '' },
+        {
+          name: 'storlek',
+          label: 'Storlek',
+          widget: 'select',
+          options: ['liten', 'medium', 'stor'],
+          default: 'medium',
+        },
+        {
+          name: 'position',
+          label: 'Position',
+          widget: 'select',
+          options: ['vänster', 'center', 'höger'],
+          default: 'center',
+        },
+      ],
+      pattern: /^{{< bild src="(?<src>.*?)" alt="(?<alt>.*?)" storlek="(?<storlek>.*?)" position="(?<position>.*?)" >}}$/,
+      toBlock: ({ src, alt, storlek, position }) =>
+        `{{< bild src="${src}" alt="${alt || ''}" storlek="${storlek}" position="${position}" >}}`,
+      toPreview: ({ src, alt, storlek, position }) => {
+        const width = storlek === 'liten' ? '150px' : storlek === 'stor' ? '100%' : '300px';
+        const float = position === 'vänster' ? 'left' : position === 'höger' ? 'right' : 'none';
+        return `<img src="${src}" alt="${alt || ''}" style="max-width:${width};float:${float};margin:0 1rem 1rem 0;">`;
+      },
+    });
+  </script>
 </body>
 </html>
