@@ -271,6 +271,7 @@
 }
 
 .citatrad__item {
+  margin: 0;
   padding-left: var(--space-3);
   border-left: 3px solid var(--color-accent);
   font-style: italic;

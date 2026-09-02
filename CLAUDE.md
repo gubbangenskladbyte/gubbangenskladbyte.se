@@ -209,6 +209,12 @@ justify-content: center` runt `.citatrad__item`-blocken (`max-width:
 15rem` vardera), så gruppen alltid centreras oavsett hur många av de
 1–4 fälten som är ifyllda. Registrerad CMS-komponent samlar alla
 citat i **ett** formulär (inte ett klick per citat som tidigare).
+**Alla åtta parametrar måste finnas i anropet, även tomma
+(`citat4="" person4=""`)** — CMS:ets `pattern`-regex kräver alla
+namngivna attribut för att känna igen anropet i förhandsgranskningen
+(Hugo-rendreringen fungerar även utan dem, tack vare `.Get`, men då
+tappar man CMS-preview). Hände en gång i `content/sa-har-funkar-...`
+när anropet skrevs för hand utan de tomma fälten.
 
 ### `bildcitat` — två bilder + ett citat i en rad
 
