@@ -30,7 +30,7 @@
           default: 'center',
         },
       ],
-      pattern: /^{{< bild src="(?<src>.*?)" alt="(?<alt>.*?)" storlek="(?<storlek>.*?)" position="(?<position>.*?)" >}}$/,
+      pattern: /{{< bild src="(?<src>.*?)" alt="(?<alt>.*?)" storlek="(?<storlek>.*?)" position="(?<position>.*?)" >}}/,
       toBlock: ({ src, alt, storlek, position }) =>
         `{{< bild src="${src}" alt="${alt || ''}" storlek="${storlek}" position="${position}" >}}`,
       toPreview: ({ src, alt, storlek, position }) => {
