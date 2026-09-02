@@ -34,7 +34,7 @@ collections:
         public_folder: ""
         fields:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
-          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
           - { label: "Ingress", name: "ingress", widget: "text", required: false, i18n: false }
           - label: "Varukategorier"
@@ -64,7 +64,7 @@ collections:
         public_folder: ""
         fields: &sidfalt
           - { label: "Titel", name: "title", widget: "string", i18n: false }
-          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
           - label: "Bilder"
             name: "bilder"
@@ -82,7 +82,7 @@ collections:
         public_folder: ""
         fields:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
-          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
           - label: "Bilder"
             name: "bilder"
@@ -102,7 +102,7 @@ collections:
         public_folder: ""
         fields:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
-          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
           - label: "Bilder"
             name: "bilder"
@@ -128,7 +128,7 @@ collections:
         public_folder: ""
         fields:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
-          - { label: "Publicerad", name: "draft", widget: "boolean", default: false, i18n: false }
+          - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
           - { label: "Bokningslänk (alf.io)", name: "bokningsurl", widget: "string", required: false, i18n: false }
           - { label: "Bokningsknapp aktiv", name: "bokning_aktiv", widget: "boolean", default: true, i18n: false }
@@ -145,7 +145,7 @@ collections:
     fields:
       - { label: "Titel", name: "title", widget: "string", i18n: false }
       - { label: "Datum", name: "date", widget: "datetime", i18n: false }
-      - { label: "Publicerad", name: "draft", widget: "boolean", default: true, i18n: false }
+      - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: true, i18n: false, hint: "Ibockad = visas INTE på sajten än. Nya blogginlägg är dolda som standard tills du bockar ur." }
       - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
       - label: "Bilder"
         name: "bilder"

@@ -43,12 +43,12 @@ webadressen) utöver de vanliga fälten.
 ### Fält som är gemensamma för allt innehåll
 
 - **Titel** — rubriken, syns även i webbläsarens flik och i Google.
-- **Publicerad** — kryssrutan som avgör om sidan/inlägget syns på
-  sajten. **Ett nytt blogginlägg är opublicerat som standard** tills du
-  bockar i rutan; övriga sidor är publicerade som standard eftersom de
-  redan finns live. Det här är den **enda** publiceringsmekanismen —
-  det finns inget separat "schemalägg" eller "kladd"-läge utöver den
-  här kryssrutan.
+- **Dold (utkast)** — kryssrutan som avgör om sidan/inlägget syns på
+  sajten. **Ibockad = döljs**, urbockad = syns. **Ett nytt blogginlägg
+  är dolt som standard** tills du bockar ur rutan; övriga sidor är
+  synliga som standard eftersom de redan finns live. Det här är den
+  **enda** publiceringsmekanismen — det finns inget separat
+  "schemalägg"-läge utöver den här kryssrutan.
 - **Beskrivning (SEO)** — en kort sammanfattning (1–2 meningar) som
   används av sökmotorer och när länken delas i t.ex. Facebook. Syns
   inte på själva sidan.
@@ -79,7 +79,7 @@ citat.
 ### Stänga av bokningsknappen
 
 **Boka shoppingtid** har ett fält **Bokningsknapp aktiv** (kryssruta),
-skilt från **Publicerad**. Det styr bara själva knappen — resten av
+skilt från **Dold (utkast)**. Det styr bara själva knappen — resten av
 sidans text syns som vanligt oavsett:
 
 - **Ibockad** (standard): knappen visas som vanligt och länkar till
@@ -127,9 +127,10 @@ textredigeraren och skriv:
 ### Spara och publicera
 
 Spara. Ändringen skapas som en git-commit direkt mot `main` (inget
-extra godkännandesteg — se till att **Publicerad**-kryssrutan är rätt
-innan du sparar) och Cloudflare Pages bygger om sajten automatiskt —
-det tar vanligtvis under en minut innan ändringen syns live.
+extra godkännandesteg — se till att **Dold (utkast)**-kryssrutan är
+rätt innan du sparar) och Cloudflare Pages bygger om sajten
+automatiskt — det tar vanligtvis under en minut innan ändringen syns
+live.
 
 ## För utvecklare: köra sajten lokalt
 
