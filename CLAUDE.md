@@ -99,24 +99,41 @@ Domänfält som förekommer:
 - `varukategorier` — endast på startsidan, lista med produktkategorier.
 - `ingress` — kort ingresstext, endast på startsidan.
 - `bilder` — valfri lista med bilder på sidor/inlägg (widget i Sveltia
-  CMS för att kunna ladda upp bilder till bundlen). Varje post kan ha
-  ett `bildtext`-fält (bildtext/figcaption). Layouterna använder inte
-  `src` direkt för att avgöra vad som visas — de plockar upp alla
-  bildresurser i bundlen automatiskt (`partial "galleri.html"`,
-  se nedan) — men slår upp `bildtext` via `src` som nyckel för att sätta
-  rätt figcaption på rätt bild.
-- `citat` / `citatperson` — valfritt pull-quote (endast `bli-medarbetare`
-  och `for-saljare` just nu), renderas i samma rutnät som bildgalleriet
-  via `partial "galleri.html"`.
+  CMS för att kunna ladda upp bilder till bundlen). Varje post har ett
+  `src` (bundle-relativt filnamn ELLER en extern URL) och ett valfritt
+  `bildtext`-fält. `partial "galleri.html"` (se nedan) itererar
+  `bilder`-listan direkt som källa till sanning — det är inte en
+  passiv bildruta som råkar plocka upp allt i bundlen; en bild som
+  laddas upp men inte listas i `bilder` visas inte.
 
 **`draft: true/false` är enda publiceringsmekanismen.** Ingen extra
 schemaläggnings- eller statuslogik ovanpå.
 
-## `bild`-shortcode
+## `partial "galleri.html"`
 
-För enskilda bilder inline i brödtext (storlek + position + eventuell
-textflytning) — separat från det automatiska bildgalleriet ovan, som
-alltid visar alla bundle-bilder i ett rutnät utan positionskontroll.
+Renderar `bilder`-listan (se ovan) som ett rutnät av `<figure>` med
+valfri `figcaption`. Anropas med `(dict "page" . "bilder" $lista)` —
+`$lista` är oftast bara `.Params.bilder`, men sidor som redan har
+bilder inline i brödtexten (t.ex. `for-saljare`s etikettbilder via
+`bild`-shortcoden) filtrerar bort dem först med `where` så de inte
+visas dubbelt. Varje `src` provas först som extern URL
+(`http(s)://`-prefix), annars slås den upp mot bundlens resurser via
+`.Page.Resources.GetMatch`.
+
+## Shortcodes (`layouts/shortcodes/`)
+
+Alla tre kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan
+satt) och har en motsvarande **Sveltia CMS "Editor Component"**
+registrerad i `static/admin/index.html` — en knapp i verktygsfältet
+ovanför **Innehåll**-fältet som öppnar ett formulär istället för att
+redaktören skriver shortcode-syntaxen för hand. Ändrar man ett
+shortcodes parameternamn eller -ordning **måste** motsvarande
+`pattern`/`toBlock` i `static/admin/index.html` uppdateras i samma
+commit, annars slutar CMS:et känna igen befintliga instanser i
+förhandsgranskningen (hände en gång — se `pattern` nedan för varför
+det inte ska vara `^...$`-ankrat).
+
+### `bild` — enskild bild i löptext med storlek/position
 
 ```
 {{< bild src="filnamn.jpg" storlek="liten" position="höger" alt="Alt-text" >}}
@@ -126,19 +143,42 @@ alltid visar alla bundle-bilder i ett rutnät utan positionskontroll.
 - `position`: `vänster` / `center` (standard) / `höger` — vänster/höger
   floatar bilden så text flyter runt den, center gör den till ett
   centrerat block
-- `src` matchas mot en bildresurs i sidans egen page bundle via
-  `.Page.Resources.GetMatch` — samma bundle-princip som `bilder`-fältet
-- Kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan satt) —
-  shortcoden själv renderar ren `<img>`, men samma inställning tillåter
-  även rå HTML i markdown-body rent generellt (används t.ex. för
-  `<div class="quotes">`-blocket på `sa-har-funkar-det-att-salja`)
-- Om `src` inte matchar någon bundle-resurs: `warnf` i byggloggen
-  (icke-fatalt, bygget fortsätter, bilden visas bara inte) — inte
-  `errorf`, för att en redaktörs felstavade filnamn inte ska kunna
-  fälla hela deployen
+- `src`: bundle-relativt filnamn eller extern URL (samma upplösning som
+  `bilder`-fältet, se `partial "galleri.html"` ovan)
+- Om `src` inte kan matchas mot något: `warnf` i byggloggen (icke-fatalt,
+  bygget fortsätter, bilden visas bara inte) — inte `errorf`, för att en
+  redaktörs felstavade filnamn inte ska kunna fälla hela deployen
+- **Containern som `.Content` renderas i måste ha en clearfix**
+  (`::after { content:""; display:table; clear:both; }`) annars läcker
+  en flytande `bild` ut ur artikeln och överlappar det som kommer
+  efter. Alla tre ställen `.Content` renderas (`.page__body`,
+  `.post__body`, startsidans `.intro .page__body`) har den — kom ihåg
+  att lägga till den på nya containrar också.
+- CSS: `.bild`, `.bild--small/medium/large`, `.bild--left/center/right`
 
-CSS-klasserna (`.bild`, `.bild--small/medium/large`,
-`.bild--left/center/right`) ligger i `assets/css/components.css`.
+### `karta` — interaktiv Google Maps-inbäddning
+
+```
+{{< karta adress="Gubbängsskolan, Gubbängsvägen 63, Stockholm" >}}
+```
+
+Ingen API-nyckel behövs (`maps.google.com/maps?q=...&output=embed`).
+Renderar även en "Visa vägbeskrivning"-länk. CSS: `.karta`.
+
+### `citat` — enskilt citat i löptext
+
+```
+{{< citat text="Citattext." person="Namn" >}}
+```
+
+`person` är valfritt. Flera anrop i rad radar upp sig i en rad tack
+vare `display: inline-block` på `.citat` (ingen förälder-grid behövs,
+till skillnad från den gamla `<div class="quotes">`-varianten som
+fanns här tidigare — borttagen). Detta är också den **enda**
+citat-mekanismen i projektet: `bli-medarbetare` och `for-saljare` hade
+tidigare ett separat `citat`/`citatperson`-frontmatter-fält som
+renderades ihop med bildgalleriet, men det konsoliderades in i den här
+shortcoden för att undvika två saker som båda hette "Citat" i CMS:et.
 
 ## Länkkonvention
 

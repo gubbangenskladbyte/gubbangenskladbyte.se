@@ -30,8 +30,8 @@ del av Om oss, ingen egen sida):
 | Sida | Extra fält utöver Titel/Beskrivning/Bilder/Innehåll |
 |---|---|
 | Så här funkar det att sälja | — |
-| Bli medarbetare | **Citat** + **Citat — person** (se nedan) |
-| För säljare | **Citat** + **Citat — person** |
+| Bli medarbetare | — |
+| För säljare | — |
 | Om oss | — |
 | Boka shoppingtid | **Bokningslänk (alf.io)** + **Bokningsknapp aktiv** (se nedan) |
 
@@ -68,13 +68,21 @@ Vill du istället ha en bild inne **i löptexten** — mindre, med text
 som flyter runt den (som Human Bridge-loggan på "Så här funkar det att
 sälja") — se avsnittet om `bild`-shortcoden nedan.
 
-### Citat
+### Citat, kartor och andra knappar i verktygsfältet
 
-**Bli medarbetare** och **För säljare** har ett extra **Citat**- och
-**Citat — person**-fält. Det renderas som ett fristående citat med en
-röd kantlinje, placerat bredvid bildgalleriet längst ner på sidan —
-inte inne i löptexten. Lämna fälten tomma om sidan inte ska ha något
-citat.
+Ovanför **Innehåll**-fältet finns knappar som infogar färdigformaterat
+innehåll i löptexten — inget att skriva för hand:
+
+- **Bild (storlek/position)** — se nästa avsnitt.
+- **Karta (Google Maps)** — en interaktiv, zoombar karta med
+  vägbeskrivning. Fyll bara i en adress.
+- **Citat** — ett fristående citat med röd kantlinje (som på "Bli
+  medarbetare" och "Så här funkar det att sälja"). Går bra att klicka
+  flera gånger i rad för flera citat efter varandra (som "Vad säger
+  folk om oss?").
+
+Klicka på knappen, fyll i formuläret, klart. Klicka på det infogade
+blocket igen för att redigera det senare.
 
 ### Stänga av bokningsknappen
 

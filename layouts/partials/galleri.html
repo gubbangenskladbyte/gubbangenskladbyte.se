@@ -1,6 +1,6 @@
 {{ $page := .page }}
 {{ $bilder := .bilder }}
-{{ if or $bilder $page.Params.citat }}
+{{ if $bilder }}
 <div class="galleri__grid">
   {{ range $bilder }}
   {{ $src := .src }}
@@ -16,12 +16,6 @@
     {{ with .bildtext }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}
-  {{ end }}
-  {{ with $page.Params.citat }}
-  <blockquote class="galleri__quote">
-    <p>{{ . }}</p>
-    {{ with $page.Params.citatperson }}<cite>{{ . }}</cite>{{ end }}
-  </blockquote>
   {{ end }}
 </div>
 {{ end }}

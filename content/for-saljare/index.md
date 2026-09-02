@@ -10,8 +10,6 @@ bilder:
     bildtext: "Mikaela i styrelsen märker upp och sorterar"
   - src: "gubbis7.jpg"
     bildtext: "Elin hjälper sina nyrekryter att märka upp"
-citat: "Det bästa med att vara med och jobba är att se alla glada besökare som gör otroliga fynd."
-citatperson: "Elin Lennartsson"
 ---
 
 Här har vi samlat information som är specifik för dig som fått ett säljnummer och ska sälja kläder på vårt byte. Oavsett om du är ny eller rutinerad säljare så ber vi dig läsa igenom detta då vi kan ha uppdaterat riktlinjer och saker att tänka på.
@@ -107,3 +105,5 @@ Du kan välja att skänka osålda varor till välgörenhet (Söderledskyrkan, Hu
 Vi är inte försäkrade, så all inlämning sker på egen risk. Stölder förekommer tyvärr, så vi avråder från att lämna in alltför värdefulla saker — då är t.ex. Blocket eller Marketplace ett säkrare alternativ.
 
 Vi tar ut en avgift på 25 % av försäljningen för omkostnader. Om du, mot förmodan, inte kan sälja behöver du lämna besked om det senast en vecka innan bytet. Senare avbokning än så, oavsett orsak, innebär att du stryks från vår mejllista och inte får sälja kläder genom oss igen.
+
+{{< citat text="Det bästa med att vara med och jobba är att se alla glada besökare som gör otroliga fynd." person="Elin Lennartsson" >}}

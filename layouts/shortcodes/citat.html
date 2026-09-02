@@ -1,0 +1,6 @@
+{{ $text := .Get "text" }}
+{{ $person := .Get "person" }}
+<blockquote class="citat">
+  <p>{{ $text }}</p>
+  {{ with $person }}<cite>{{ . }}</cite>{{ end }}
+</blockquote>

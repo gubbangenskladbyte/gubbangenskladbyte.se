@@ -92,8 +92,6 @@ collections:
             fields:
               - { label: "Bild", name: "src", widget: "image" }
               - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
-          - { label: "Citat", name: "citat", widget: "text", required: false, i18n: false }
-          - { label: "Citat — person", name: "citatperson", widget: "string", required: false, i18n: false }
           - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
       - name: "for-saljare"
         label: "För säljare"
@@ -112,8 +110,6 @@ collections:
             fields:
               - { label: "Bild", name: "src", widget: "image" }
               - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
-          - { label: "Citat", name: "citat", widget: "text", required: false, i18n: false }
-          - { label: "Citat — person", name: "citatperson", widget: "string", required: false, i18n: false }
           - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
       - name: "om-oss"
         label: "Om oss"

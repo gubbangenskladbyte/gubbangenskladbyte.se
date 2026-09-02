@@ -39,6 +39,35 @@
         return `<img src="${src}" alt="${alt || ''}" style="max-width:${width};float:${float};margin:0 1rem 1rem 0;">`;
       },
     });
+
+    window.CMS.registerEditorComponent({
+      id: 'karta',
+      label: 'Karta (Google Maps)',
+      icon: 'map',
+      fields: [{ name: 'adress', label: 'Adress', widget: 'string' }],
+      pattern: /{{< karta adress="(?<adress>.*?)" >}}/,
+      toBlock: ({ adress }) => `{{< karta adress="${adress}" >}}`,
+      toPreview: ({ adress }) =>
+        `<div style="padding:1rem 1.25rem;background:#f5f7f6;border:1px solid #e4e7eb;border-radius:8px;">🗺️ Interaktiv karta: <strong>${adress || ''}</strong></div>`,
+    });
+
+    window.CMS.registerEditorComponent({
+      id: 'citat',
+      label: 'Citat',
+      icon: 'format_quote',
+      fields: [
+        { name: 'text', label: 'Citat', widget: 'text' },
+        { name: 'person', label: 'Person', widget: 'string', required: false },
+      ],
+      pattern: /{{< citat text="(?<text>.*?)" person="(?<person>.*?)" >}}/,
+      toBlock: ({ text, person }) => `{{< citat text="${text}" person="${person || ''}" >}}`,
+      toPreview: ({ text, person }) =>
+        `<blockquote style="display:inline-block;max-width:18rem;padding-left:1rem;border-left:3px solid #cf5c4c;font-style:italic;"><p>${
+          text || ''
+        }</p><cite style="display:block;margin-top:0.5rem;font-size:0.85rem;font-style:normal;color:#666;">${
+          person || ''
+        }</cite></blockquote>`,
+    });
   </script>
 </body>
 </html>
