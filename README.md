@@ -80,14 +80,15 @@ innehåll i löptexten — inget att skriva för hand:
 - **Bild (storlek/position)** — se nästa avsnitt.
 - **Karta (Google Maps)** — en interaktiv, zoombar karta med
   vägbeskrivning. Fyll bara i en adress.
-- **Citat** — ett fristående citat med röd kantlinje. Ett
+- **Citat** — ett enstaka fristående citat med röd kantlinje. Ett
   **Position**-fält styr hur det placeras:
-  - **På rad** (standard) — klicka knappen flera gånger i rad för
-    flera citat sida vid sida (som "Vad säger folk om oss?" på "Så här
-    funkar det att sälja").
-  - **Centrerad** — ett enda citat, centrerat.
+  - **Centrerad** (standard) — ett enda citat, centrerat.
   - **Vänster**/**Höger** — texten flyter runt citatet, precis som för
     Bild.
+- **Citat i rad (flera, centrerade)** — för flera citat sida vid sida
+  (som "Vad säger folk om oss?" på "Så här funkar det att sälja").
+  Fyll i 2–4 citat i samma formulär — de läggs i en rad och centreras
+  alltid som grupp, oavsett hur många det är.
 - **Bilder + citat (rad)** — återskapar "personalfoto + personalfoto +
   citat i en rad"-layouten (som på "Bli medarbetare" och "För
   säljare"). Fyll i en eller två bilder och valfritt ett citat.

@@ -177,26 +177,38 @@ Renderar även en "Visa vägbeskrivning"-länk. CSS: `.karta`.
 ### `citat` — enskilt citat i löptext
 
 ```
-{{< citat text="Citattext." person="Namn" position="rad" >}}
+{{< citat text="Citattext." person="Namn" position="center" >}}
 ```
 
-`person` är valfritt. `position`: `rad` (standard) / `center` /
-`vänster` / `höger` — mappar till CSS-klasserna `.citat--row/center/left/right`:
+`person` är valfritt. `position`: `center` (standard) / `vänster` /
+`höger` — mappar till CSS-klasserna `.citat--center/left/right`:
 
-- `rad` — `display: inline-block`, `max-width: 15rem`. Flera `citat`
-  med `position="rad"` i följd (inga andra element mellan) radar upp
-  sig i en rad, ingen förälder-grid behövs. Tre stycken är precis så
-  breda att de får plats i `.page__body`s innehållsbredd (~928px) —
-  bredare `max-width` gör att den tredje radbryter.
 - `center` — `display: block`, centrerat block, `max-width: 22rem`.
 - `vänster`/`höger` — floatar (samma clearfix-krav som `bild`, se
   nedan).
 
-Detta är den **enda** citat-mekanismen i projektet — `bli-medarbetare`
-och `for-saljare` hade tidigare ett separat
-`citat`/`citatperson`-frontmatter-fält som renderades ihop med
-bildgalleriet, men det konsoliderades in i den här shortcoden för att
-undvika två saker som båda hette "Citat" i CMS:et.
+Detta är mekanismen för ett **enstaka** citat. `bli-medarbetare` och
+`for-saljare` hade tidigare ett separat `citat`/`citatperson`-
+frontmatter-fält som renderades ihop med bildgalleriet, men det
+konsoliderades in i den här shortcoden för att undvika två saker som
+båda hette "Citat" i CMS:et. Se `citatrad` nedan för flera citat sida
+vid sida.
+
+### `citatrad` — flera citat i en centrerad rad
+
+```
+{{< citatrad citat1="Citat 1." person1="Namn 1" citat2="Citat 2." person2="Namn 2" citat3="Citat 3." person3="Namn 3" citat4="" person4="" >}}
+```
+
+Ersatte tidigare `citat`s `position="rad"` (inline-block-uppradning),
+som lämnade tomrum till höger när färre än radbredden fylldes — se
+`git log` för bakgrund. `citatrad` är ett enda shortcode-anrop med
+2–4 fasta citat/person-par (`citat1`/`person1` krävs, resten
+valfria); renderar en `<div class="citatrad">` med `display: flex;
+justify-content: center` runt `.citatrad__item`-blocken (`max-width:
+15rem` vardera), så gruppen alltid centreras oavsett hur många av de
+1–4 fälten som är ifyllda. Registrerad CMS-komponent samlar alla
+citat i **ett** formulär (inte ett klick per citat som tidigare).
 
 ### `bildcitat` — två bilder + ett citat i en rad
 

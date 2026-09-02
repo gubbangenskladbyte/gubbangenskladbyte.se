@@ -63,26 +63,60 @@
           label: 'Position',
           widget: 'select',
           options: [
-            { label: 'På rad (flera citat efter varandra)', value: 'rad' },
             { label: 'Centrerad', value: 'center' },
             { label: 'Vänster (text flyter runt)', value: 'vänster' },
             { label: 'Höger (text flyter runt)', value: 'höger' },
           ],
-          default: 'rad',
+          default: 'center',
         },
       ],
       pattern: /{{< citat text="(?<text>.*?)" person="(?<person>.*?)" position="(?<position>.*?)" >}}/,
       toBlock: ({ text, person, position }) =>
-        `{{< citat text="${text}" person="${person || ''}" position="${position || 'rad'}" >}}`,
+        `{{< citat text="${text}" person="${person || ''}" position="${position || 'center'}" >}}`,
       toPreview: ({ text, person, position }) => {
         const float = position === 'vänster' ? 'left' : position === 'höger' ? 'right' : 'none';
-        const display = position === 'center' || position === 'rad' ? 'inline-block' : 'block';
         const margin = position === 'center' ? '0 auto' : '0 1rem 1rem 0';
-        return `<blockquote style="display:${display};float:${float};max-width:18rem;margin:${margin};padding-left:1rem;border-left:3px solid #cf5c4c;font-style:italic;"><p>${
+        return `<blockquote style="display:block;float:${float};max-width:18rem;margin:${margin};padding-left:1rem;border-left:3px solid #cf5c4c;font-style:italic;"><p>${
           text || ''
         }</p><cite style="display:block;margin-top:0.5rem;font-size:0.85rem;font-style:normal;color:#666;">${
           person || ''
         }</cite></blockquote>`;
+      },
+    });
+
+    window.CMS.registerEditorComponent({
+      id: 'citatrad',
+      label: 'Citat i rad (flera, centrerade)',
+      icon: 'format_quote',
+      fields: [
+        { name: 'citat1', label: 'Citat 1', widget: 'text' },
+        { name: 'person1', label: 'Citat 1 — person', widget: 'string', required: false, default: '' },
+        { name: 'citat2', label: 'Citat 2', widget: 'text', required: false, default: '' },
+        { name: 'person2', label: 'Citat 2 — person', widget: 'string', required: false, default: '' },
+        { name: 'citat3', label: 'Citat 3', widget: 'text', required: false, default: '' },
+        { name: 'person3', label: 'Citat 3 — person', widget: 'string', required: false, default: '' },
+        { name: 'citat4', label: 'Citat 4', widget: 'text', required: false, default: '' },
+        { name: 'person4', label: 'Citat 4 — person', widget: 'string', required: false, default: '' },
+      ],
+      pattern:
+        /{{< citatrad citat1="(?<citat1>.*?)" person1="(?<person1>.*?)" citat2="(?<citat2>.*?)" person2="(?<person2>.*?)" citat3="(?<citat3>.*?)" person3="(?<person3>.*?)" citat4="(?<citat4>.*?)" person4="(?<person4>.*?)" >}}/,
+      toBlock: ({ citat1, person1, citat2, person2, citat3, person3, citat4, person4 }) =>
+        `{{< citatrad citat1="${citat1 || ''}" person1="${person1 || ''}" citat2="${citat2 || ''}" person2="${
+          person2 || ''
+        }" citat3="${citat3 || ''}" person3="${person3 || ''}" citat4="${citat4 || ''}" person4="${
+          person4 || ''
+        }" >}}`,
+      toPreview: ({ citat1, person1, citat2, person2, citat3, person3, citat4, person4 }) => {
+        const quote = (text, person) =>
+          text
+            ? `<blockquote style="max-width:15rem;padding-left:1rem;border-left:3px solid #cf5c4c;font-style:italic;"><p>${text}</p><cite style="display:block;margin-top:0.5rem;font-size:0.85rem;font-style:normal;color:#666;">${
+                person || ''
+              }</cite></blockquote>`
+            : '';
+        return `<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">${quote(
+          citat1,
+          person1
+        )}${quote(citat2, person2)}${quote(citat3, person3)}${quote(citat4, person4)}</div>`;
       },
     });
 

@@ -32,8 +32,6 @@ Det finns möjlighet att "kryssa" plagg och saker — det innebär att om de int
 
 ## Vad säger folk om oss?
 
-{{< citat text="Bästa barn-loppisen jag varit på." person="Elin Lennartsson" position="rad" >}}
-{{< citat text="Otroligt bra arrangerat, fina kläder och grejer i bra skick." person="Jenny Enoksson" position="rad" >}}
-{{< citat text="Supertrevlig personal och SÅ bra för miljö och plånbok." person="Linn Hultman" position="rad" >}}
+{{< citatrad citat1="Bästa barn-loppisen jag varit på." person1="Elin Lennartsson" citat2="Otroligt bra arrangerat, fina kläder och grejer i bra skick." person2="Jenny Enoksson" citat3="Supertrevlig personal och SÅ bra för miljö och plånbok." person3="Linn Hultman" >}}
 
 ### Våra loppisar vore ingenting utan er säljare

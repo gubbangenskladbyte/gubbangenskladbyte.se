@@ -1,0 +1,23 @@
+{{ $citat1 := .Get "citat1" }}
+{{ $person1 := .Get "person1" }}
+{{ $citat2 := .Get "citat2" }}
+{{ $person2 := .Get "person2" }}
+{{ $citat3 := .Get "citat3" }}
+{{ $person3 := .Get "person3" }}
+{{ $citat4 := .Get "citat4" }}
+{{ $person4 := .Get "person4" }}
+
+{{ $quotes := slice }}
+{{ if $citat1 }}{{ $quotes = $quotes | append (dict "text" $citat1 "person" $person1) }}{{ end }}
+{{ if $citat2 }}{{ $quotes = $quotes | append (dict "text" $citat2 "person" $person2) }}{{ end }}
+{{ if $citat3 }}{{ $quotes = $quotes | append (dict "text" $citat3 "person" $person3) }}{{ end }}
+{{ if $citat4 }}{{ $quotes = $quotes | append (dict "text" $citat4 "person" $person4) }}{{ end }}
+
+<div class="citatrad">
+  {{ range $quotes }}
+  <blockquote class="citatrad__item">
+    <p>{{ .text }}</p>
+    {{ with .person }}<cite>{{ . }}</cite>{{ end }}
+  </blockquote>
+  {{ end }}
+</div>
