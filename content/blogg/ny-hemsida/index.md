@@ -8,4 +8,4 @@ bilder: []
 
 Nu testar vi att skapa ett nygg blogginlägg
 
-{{< bild src="" alt="" storlek="medium" position="höger" >}}
+{{< bild src="https://picsum.photos/id/343/1920/1280.webp" alt="" storlek="medium" position="höger" >}}
