@@ -4,6 +4,7 @@ date: 2026-08-30
 draft: false
 description: "Boka din shoppingtid inför nästa klädbyte."
 bokningsurl: "https://bokning.gubbangenskladbyte.se"
+bokning_aktiv: false
 ---
 
 Under pandemin började vi med förbokade shoppingtider, för att vi skulle kunna ha öppet. Detta föll väl ut och våra besökare och medarbetare uppskattade det väldigt mycket, därför har vi valt att fortsätta med det — det är nu det nya normala för vårt barnklädesbyte.

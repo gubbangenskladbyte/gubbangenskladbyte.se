@@ -33,7 +33,7 @@ De sex fristående sidorna som nås via huvudmenyn:
 | För säljare | **Citat** + **Citat — person** |
 | Om oss | — |
 | Kontakta oss | — |
-| Boka shoppingtid | **Bokningslänk (alf.io)** — url till den externa bokningen |
+| Boka shoppingtid | **Bokningslänk (alf.io)** + **Bokningsknapp aktiv** (se nedan) |
 
 **Blogg**
 Nyhetsinlägg. Skapa ett nytt via **"Ny Blogg"**-knappen. Varje inlägg
@@ -75,6 +75,19 @@ sälja") — se avsnittet om `bild`-shortcoden nedan.
 röd kantlinje, placerat bredvid bildgalleriet längst ner på sidan —
 inte inne i löptexten. Lämna fälten tomma om sidan inte ska ha något
 citat.
+
+### Stänga av bokningsknappen
+
+**Boka shoppingtid** har ett fält **Bokningsknapp aktiv** (kryssruta),
+skilt från **Publicerad**. Det styr bara själva knappen — resten av
+sidans text syns som vanligt oavsett:
+
+- **Ibockad** (standard): knappen visas som vanligt och länkar till
+  bokningssystemet.
+- **Urbockad**: knappen ersätts med en gråtonad, oklickbar text
+  ("Bokning är stängd just nu") — praktiskt när det inte går att köpa
+  biljetter just nu, t.ex. mellan bytena eller när bokningen inte
+  öppnat än, utan att behöva dölja hela sidan.
 
 ### Skriva och formatera text
 

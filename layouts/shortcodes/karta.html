@@ -1,0 +1,14 @@
+{{ $adress := .Get "adress" }}
+<div class="karta">
+  <iframe
+    src="https://maps.google.com/maps?q={{ $adress | urlquery }}&output=embed"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="karta__lank">
+  <a href="https://www.google.com/maps/dir/?api=1&destination={{ $adress | urlquery }}" target="_blank" rel="noopener">
+    Visa vägbeskrivning i Google Maps →
+  </a>
+</p>

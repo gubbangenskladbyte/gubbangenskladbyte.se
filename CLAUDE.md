@@ -88,6 +88,13 @@ Domänfält som förekommer:
 - `bokningsurl` — endast på `boka-shoppingtid`, länk till den
   externa alf.io-bokningen (`bokning.gubbangenskladbyte.se`, egenhostad,
   inte del av detta repo).
+- `bokning_aktiv` — bool, endast på `boka-shoppingtid`. Styr bara
+  CTA-knappen (rendrad i `layouts/_default/single.html`), inte sidans
+  synlighet — det är `draft` som styr det. `false` byter ut länken mot
+  en inaktiverad `<span class="btn btn--disabled">`. Notera:
+  `eq $.Params.bokning_aktiv false` används istället för Hugos
+  `default`-funktion, eftersom `default` behandlar `false` som ett tomt
+  värde och skulle skriva över en avsiktlig `false` med `true`.
 - `varukategorier` — endast på startsidan, lista med produktkategorier.
 - `ingress` — kort ingresstext, endast på startsidan.
 - `bilder` — valfri lista med bilder på sidor/inlägg (widget i Sveltia
