@@ -84,14 +84,6 @@ collections:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
           - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
-          - label: "Bilder"
-            name: "bilder"
-            widget: "list"
-            required: false
-            i18n: false
-            fields:
-              - { label: "Bild", name: "src", widget: "image" }
-              - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
           - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
       - name: "for-saljare"
         label: "För säljare"
@@ -102,14 +94,6 @@ collections:
           - { label: "Titel", name: "title", widget: "string", i18n: false }
           - { label: "Dold (utkast)", name: "draft", widget: "boolean", default: false, i18n: false, hint: "Ibockad = visas INTE på sajten än. Lämna urbockad för att den ska synas." }
           - { label: "Beskrivning (SEO)", name: "description", widget: "text", i18n: false }
-          - label: "Bilder"
-            name: "bilder"
-            widget: "list"
-            required: false
-            i18n: false
-            fields:
-              - { label: "Bild", name: "src", widget: "image" }
-              - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
           - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
       - name: "om-oss"
         label: "Om oss"

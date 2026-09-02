@@ -24,7 +24,11 @@ Bygget skriver till `public/` (gitignorat).
 - **Inget tema.** `layouts/`, `assets/`, `static/` ligger direkt i
   repo-roten.
 - `layouts/_default/` innehåller generiska `baseof.html`, `single.html`,
-  `list.html`. `layouts/blogg/` har sektionsspecifika overrides
+  `list.html` — täcker numera **alla** fristående sidor (`for-saljare`
+  och `sa-har-funkar-det-att-salja` hade tidigare egna sidspecifika
+  `single.html`-overrides, men de blev identiska med default-mallen när
+  deras särbehandling flyttades in i shortcodes/`bildcitat`, så filerna
+  togs bort). `layouts/blogg/` har sektionsspecifika overrides
   (`list.html` med paginering, `single.html` med datum).
 - `layouts/index.html` styr startsidan (hero + introtext + varukategorier
   + ev. bilder).
@@ -122,7 +126,7 @@ visas dubbelt. Varje `src` provas först som extern URL
 
 ## Shortcodes (`layouts/shortcodes/`)
 
-Alla tre kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan
+Alla fyra kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan
 satt) och har en motsvarande **Sveltia CMS "Editor Component"**
 registrerad i `static/admin/index.html` — en knapp i verktygsfältet
 ovanför **Innehåll**-fältet som öppnar ett formulär istället för att
@@ -131,7 +135,12 @@ shortcodes parameternamn eller -ordning **måste** motsvarande
 `pattern`/`toBlock` i `static/admin/index.html` uppdateras i samma
 commit, annars slutar CMS:et känna igen befintliga instanser i
 förhandsgranskningen (hände en gång — se `pattern` nedan för varför
-det inte ska vara `^...$`-ankrat).
+det inte ska vara `^...$`-ankrat). Byter man ett shortcodes
+parametrar (t.ex. lägger till `position` på `citat`) måste **alla**
+befintliga anrop i content-filerna uppdateras med det nya
+parametersetet också, annars matchar inte `pattern` dem längre i
+CMS-förhandsgranskningen (Hugo-rendreringen fortsätter dock fungera
+tack vare `| default` i shortcode-templaten).
 
 ### `bild` — enskild bild i löptext med storlek/position
 
@@ -168,17 +177,42 @@ Renderar även en "Visa vägbeskrivning"-länk. CSS: `.karta`.
 ### `citat` — enskilt citat i löptext
 
 ```
-{{< citat text="Citattext." person="Namn" >}}
+{{< citat text="Citattext." person="Namn" position="rad" >}}
 ```
 
-`person` är valfritt. Flera anrop i rad radar upp sig i en rad tack
-vare `display: inline-block` på `.citat` (ingen förälder-grid behövs,
-till skillnad från den gamla `<div class="quotes">`-varianten som
-fanns här tidigare — borttagen). Detta är också den **enda**
-citat-mekanismen i projektet: `bli-medarbetare` och `for-saljare` hade
-tidigare ett separat `citat`/`citatperson`-frontmatter-fält som
-renderades ihop med bildgalleriet, men det konsoliderades in i den här
-shortcoden för att undvika två saker som båda hette "Citat" i CMS:et.
+`person` är valfritt. `position`: `rad` (standard) / `center` /
+`vänster` / `höger` — mappar till CSS-klasserna `.citat--row/center/left/right`:
+
+- `rad` — `display: inline-block`, `max-width: 15rem`. Flera `citat`
+  med `position="rad"` i följd (inga andra element mellan) radar upp
+  sig i en rad, ingen förälder-grid behövs. Tre stycken är precis så
+  breda att de får plats i `.page__body`s innehållsbredd (~928px) —
+  bredare `max-width` gör att den tredje radbryter.
+- `center` — `display: block`, centrerat block, `max-width: 22rem`.
+- `vänster`/`höger` — floatar (samma clearfix-krav som `bild`, se
+  nedan).
+
+Detta är den **enda** citat-mekanismen i projektet — `bli-medarbetare`
+och `for-saljare` hade tidigare ett separat
+`citat`/`citatperson`-frontmatter-fält som renderades ihop med
+bildgalleriet, men det konsoliderades in i den här shortcoden för att
+undvika två saker som båda hette "Citat" i CMS:et.
+
+### `bildcitat` — två bilder + ett citat i en rad
+
+```
+{{< bildcitat bild1="a.jpg" bildtext1="Text A" bild2="b.jpg" bildtext2="Text B" citat="Citattext." citatperson="Namn" >}}
+```
+
+Återskapar layouten från originalsajten (två personalfoton + ett citat
+i samma rad, `.galleri__grid`/`.galleri__quote`) som ett fristående
+block — inte kopplat till `bilder`-fältet eller `partial
+"galleri.html"`. Alla sex fält är strängar; `bild2`/`bildtext2`/
+`citat`/`citatperson` kan lämnas tomma om man bara vill ha en bild.
+Används på `bli-medarbetare` och `for-saljare`, som därför **inte**
+längre har ett `bilder`-fält i CMS:et — deras bilder (inklusive
+`for-saljare`s etikettbilder via `bild`-shortcoden) refereras alla
+direkt via shortcode-anrop i `body`, inget behöver listas separat.
 
 ## Länkkonvention
 
@@ -193,10 +227,13 @@ shortcoden för att undvika två saker som båda hette "Citat" i CMS:et.
 
 `static/admin/config.yml` speglar innehållsmodellen 1:1:
 - **`startsida`** — file collection, en post (`content/_index.md`).
-- **`sidor`** — file collection med sex poster, en per fristående sida.
-  Fälten för fem av dem (alla utom `boka-shoppingtid`) delas via en
-  YAML-anker (`&sidfalt`/`*sidfalt`) eftersom de har identisk
-  fältstruktur.
+- **`sidor`** — file collection med fem poster, en per fristående sida.
+  `sa-har-funkar-det-att-salja` och `om-oss` delar fältlista via en
+  YAML-anker (`&sidfalt`/`*sidfalt`, båda har ett `Bilder`-fält).
+  `bli-medarbetare` och `for-saljare` har egna, enklare fältlistor utan
+  `Bilder` (deras bilder kommer via `bildcitat`/`bild`-shortcodes i
+  `body` istället, se ovan). `boka-shoppingtid` har sin egen fältlista
+  för bokningsfälten.
 - **`blogg`** — folder collection kopplad till `content/blogg/`, skapar
   nya inlägg som `<slug>/index.md`.
 

@@ -27,12 +27,12 @@ listan med varukategorier ("Vad kan du hitta hos oss?") och bilder.
 De fem fristående sidorna som nås via huvudmenyn (kontaktuppgifter är en
 del av Om oss, ingen egen sida):
 
-| Sida | Extra fält utöver Titel/Beskrivning/Bilder/Innehåll |
+| Sida | Extra fält utöver Titel/Beskrivning/Innehåll |
 |---|---|
-| Så här funkar det att sälja | — |
-| Bli medarbetare | — |
-| För säljare | — |
-| Om oss | — |
+| Så här funkar det att sälja | **Bilder** |
+| Bli medarbetare | — (bilder infogas i Innehåll via **Bilder + citat**-knappen) |
+| För säljare | — (bilder infogas i Innehåll via **Bild**/**Bilder + citat**-knapparna) |
+| Om oss | **Bilder** |
 | Boka shoppingtid | **Bokningslänk (alf.io)** + **Bokningsknapp aktiv** (se nedan) |
 
 **Blogg**
@@ -52,7 +52,11 @@ webadressen) utöver de vanliga fälten.
 - **Beskrivning (SEO)** — en kort sammanfattning (1–2 meningar) som
   används av sökmotorer och när länken delas i t.ex. Facebook. Syns
   inte på själva sidan.
-- **Bilder** — se nästa avsnitt.
+- **Bilder** — finns bara på sidor som listar flera bilder i ett
+  bildgalleri (Startsida, "Så här funkar det att sälja", Om oss,
+  Blogg). Se nästa avsnitt. På Bli medarbetare/För säljare infogas
+  bilder istället direkt i löptexten via knapparna i verktygsfältet
+  (se "Citat, kartor och andra knappar" nedan).
 - **Innehåll** — själva brödtexten, skriven i markdown (se
   formateringsavsnittet nedan).
 
@@ -76,10 +80,17 @@ innehåll i löptexten — inget att skriva för hand:
 - **Bild (storlek/position)** — se nästa avsnitt.
 - **Karta (Google Maps)** — en interaktiv, zoombar karta med
   vägbeskrivning. Fyll bara i en adress.
-- **Citat** — ett fristående citat med röd kantlinje (som på "Bli
-  medarbetare" och "Så här funkar det att sälja"). Går bra att klicka
-  flera gånger i rad för flera citat efter varandra (som "Vad säger
-  folk om oss?").
+- **Citat** — ett fristående citat med röd kantlinje. Ett
+  **Position**-fält styr hur det placeras:
+  - **På rad** (standard) — klicka knappen flera gånger i rad för
+    flera citat sida vid sida (som "Vad säger folk om oss?" på "Så här
+    funkar det att sälja").
+  - **Centrerad** — ett enda citat, centrerat.
+  - **Vänster**/**Höger** — texten flyter runt citatet, precis som för
+    Bild.
+- **Bilder + citat (rad)** — återskapar "personalfoto + personalfoto +
+  citat i en rad"-layouten (som på "Bli medarbetare" och "För
+  säljare"). Fyll i en eller två bilder och valfritt ett citat.
 
 Klicka på knappen, fyll i formuläret, klart. Klicka på det infogade
 blocket igen för att redigera det senare.

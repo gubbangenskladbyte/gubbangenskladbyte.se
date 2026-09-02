@@ -1,6 +1,11 @@
 {{ $text := .Get "text" }}
 {{ $person := .Get "person" }}
-<blockquote class="citat">
+{{ $positionIn := .Get "position" | default "rad" }}
+
+{{ $positioner := dict "rad" "row" "vänster" "left" "center" "center" "höger" "right" }}
+{{ $position := index $positioner $positionIn | default "row" }}
+
+<blockquote class="citat citat--{{ $position }}">
   <p>{{ $text }}</p>
   {{ with $person }}<cite>{{ . }}</cite>{{ end }}
 </blockquote>

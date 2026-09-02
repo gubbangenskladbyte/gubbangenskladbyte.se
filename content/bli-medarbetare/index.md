@@ -3,11 +3,6 @@ title: "Bli medarbetare"
 date: 2026-08-30
 draft: false
 description: "Vi söker fler volontärer till Gubbängens Barnklädesbyte."
-bilder:
-  - src: "gubbis8mikaela.jpeg"
-    bildtext: "Mikaela i styrelsen märker upp och sorterar"
-  - src: "gubbis7.jpg"
-    bildtext: "Elin hjälper sina nyrekryter att märka upp"
 ---
 
 Vid varje klädbyte får vi frågan hur man gör för att "bli en av oss" som jobbar med detta. Vi är i dagsläget ca 50 medarbetare som lägger ner totalt ca 3 dagar per byte, helt ideellt. Vi gör detta dels för att det är så otroligt roligt och dels för att det är för ett så gott ändamål.
@@ -16,4 +11,4 @@ De flesta medarbetarna har kommit till oss på rekommendation av tidigare medarb
 
 **Är du intresserad av att jobba med oss du också?** Skicka oss ett mejl på [gubbangenskladbyte@gmail.com](mailto:gubbangenskladbyte@gmail.com) och berätta lite om dig själv så hör vi av oss!
 
-{{< citat text="Det bästa med att vara med att jobba är att se alla glada besökare som gör otroliga fynd." person="Elin Lennartsson" >}}
+{{< bildcitat bild1="gubbis8mikaela.jpeg" bildtext1="Mikaela i styrelsen märker upp och sorterar" bild2="gubbis7.jpg" bildtext2="Elin hjälper sina nyrekryter att märka upp" citat="Det bästa med att vara med att jobba är att se alla glada besökare som gör otroliga fynd." citatperson="Elin Lennartsson" >}}

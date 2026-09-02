@@ -226,11 +226,6 @@
 
 /* citat-shortcode */
 .citat {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-  max-width: 15rem;
-  margin: 0 var(--space-3) var(--space-4) 0;
   padding-left: var(--space-3);
   border-left: 3px solid var(--color-accent);
   font-style: italic;
@@ -241,6 +236,54 @@
 }
 
 .citat cite {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--color-muted);
+}
+
+.citat--row {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: 15rem;
+  margin: 0 var(--space-3) var(--space-4) 0;
+}
+
+.citat--center {
+  display: block;
+  max-width: 22rem;
+  margin: 0 auto var(--space-4);
+}
+
+.citat--left {
+  float: left;
+  max-width: 16rem;
+  margin: 0 var(--space-4) var(--space-3) 0;
+}
+
+.citat--right {
+  float: right;
+  max-width: 16rem;
+  margin: 0 0 var(--space-3) var(--space-4);
+}
+
+/* galleri__quote — pull-quote inside a galleri__grid (bildcitat-shortcoden) */
+.galleri__quote {
+  margin: 0;
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  align-self: center;
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+.galleri__quote p {
+  margin: 0;
+}
+
+.galleri__quote cite {
   display: block;
   margin-top: var(--space-2);
   font-size: 0.875rem;

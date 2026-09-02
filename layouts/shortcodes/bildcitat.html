@@ -1,0 +1,33 @@
+{{ $bild1 := .Get "bild1" }}
+{{ $bildtext1 := .Get "bildtext1" }}
+{{ $bild2 := .Get "bild2" }}
+{{ $bildtext2 := .Get "bildtext2" }}
+{{ $citat := .Get "citat" }}
+{{ $citatperson := .Get "citatperson" }}
+
+{{ $bilder := slice }}
+{{ if $bild1 }}{{ $bilder = $bilder | append (dict "src" $bild1 "text" $bildtext1) }}{{ end }}
+{{ if $bild2 }}{{ $bilder = $bilder | append (dict "src" $bild2 "text" $bildtext2) }}{{ end }}
+
+<div class="galleri__grid">
+  {{ range $bilder }}
+  {{ $url := "" }}
+  {{ if or (hasPrefix .src "http://") (hasPrefix .src "https://") }}
+    {{ $url = .src }}
+  {{ else }}
+    {{ with $.Page.Resources.GetMatch .src }}{{ $url = .RelPermalink }}{{ end }}
+  {{ end }}
+  {{ if $url }}
+  <figure class="galleri__item">
+    <img class="galleri__img" src="{{ $url }}" alt="" loading="lazy">
+    {{ with .text }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{ end }}
+  {{ end }}
+  {{ with $citat }}
+  <blockquote class="galleri__quote">
+    <p>{{ . }}</p>
+    {{ with $citatperson }}<cite>{{ . }}</cite>{{ end }}
+  </blockquote>
+  {{ end }}
+</div>

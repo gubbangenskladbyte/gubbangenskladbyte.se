@@ -3,13 +3,6 @@ title: "För säljare"
 date: 2026-08-30
 draft: false
 description: "Regler för dig som vill sälja barnkläder och barnsaker hos oss: vad vi tar emot, hur du märker dina varor och vad det kostar."
-bilder:
-  - src: "etikett1.jpg"
-  - src: "etikett-1.jpg"
-  - src: "gubbis8mikaela.jpeg"
-    bildtext: "Mikaela i styrelsen märker upp och sorterar"
-  - src: "gubbis7.jpg"
-    bildtext: "Elin hjälper sina nyrekryter att märka upp"
 ---
 
 Här har vi samlat information som är specifik för dig som fått ett säljnummer och ska sälja kläder på vårt byte. Oavsett om du är ny eller rutinerad säljare så ber vi dig läsa igenom detta då vi kan ha uppdaterat riktlinjer och saker att tänka på.
@@ -106,4 +99,4 @@ Vi är inte försäkrade, så all inlämning sker på egen risk. Stölder förek
 
 Vi tar ut en avgift på 25 % av försäljningen för omkostnader. Om du, mot förmodan, inte kan sälja behöver du lämna besked om det senast en vecka innan bytet. Senare avbokning än så, oavsett orsak, innebär att du stryks från vår mejllista och inte får sälja kläder genom oss igen.
 
-{{< citat text="Det bästa med att vara med och jobba är att se alla glada besökare som gör otroliga fynd." person="Elin Lennartsson" >}}
+{{< bildcitat bild1="gubbis8mikaela.jpeg" bildtext1="Mikaela i styrelsen märker upp och sorterar" bild2="gubbis7.jpg" bildtext2="Elin hjälper sina nyrekryter att märka upp" citat="Det bästa med att vara med och jobba är att se alla glada besökare som gör otroliga fynd." citatperson="Elin Lennartsson" >}}
