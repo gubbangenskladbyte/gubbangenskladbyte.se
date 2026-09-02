@@ -24,7 +24,8 @@ Den enda sidan i den här gruppen. Hero-rubrik, ingress, introtext,
 listan med varukategorier ("Vad kan du hitta hos oss?") och bilder.
 
 **Sidor**
-De sex fristående sidorna som nås via huvudmenyn:
+De fem fristående sidorna som nås via huvudmenyn (kontaktuppgifter är en
+del av Om oss, ingen egen sida):
 
 | Sida | Extra fält utöver Titel/Beskrivning/Bilder/Innehåll |
 |---|---|
@@ -32,7 +33,6 @@ De sex fristående sidorna som nås via huvudmenyn:
 | Bli medarbetare | **Citat** + **Citat — person** (se nedan) |
 | För säljare | **Citat** + **Citat — person** |
 | Om oss | — |
-| Kontakta oss | — |
 | Boka shoppingtid | **Bokningslänk (alf.io)** + **Bokningsknapp aktiv** (se nedan) |
 
 **Blogg**

@@ -56,15 +56,16 @@ content/
   bli-medarbetare/index.md       # leaf bundle
   sa-har-funkar-det-att-salja/index.md
   boka-shoppingtid/index.md
-  kontakta-oss/index.md
   blogg/
     _index.md                    # listsida, pagineras
     <slug>/index.md              # ett leaf bundle per inlägg
 ```
 
-- De sex fristående sidorna ligger direkt i content-roten som page
+- De fem fristående sidorna ligger direkt i content-roten som page
   bundles (inte i en gemensam "sidor"-sektion) — de listas aldrig som en
-  samling, bara nås via huvudmenyn.
+  samling, bara nås via huvudmenyn. Kontaktuppgifter är en sektion i
+  Om oss, ingen egen sida — `content/kontakta-oss/` fanns tidigare som
+  en orphan-sida (aldrig länkad i `hugo.toml`s meny) och togs bort.
 - `blogg` är den enda listade sektionen (paginerad, `pagerSize = 10` i
   `hugo.toml`).
 - Varje sida/inlägg är en **leaf bundle** (`index.md` i egen mapp) så att

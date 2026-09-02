@@ -121,12 +121,6 @@ collections:
         media_folder: ""
         public_folder: ""
         fields: *sidfalt
-      - name: "kontakta-oss"
-        label: "Kontakta oss"
-        file: "content/kontakta-oss/index.md"
-        media_folder: ""
-        public_folder: ""
-        fields: *sidfalt
       - name: "boka-shoppingtid"
         label: "Boka shoppingtid"
         file: "content/boka-shoppingtid/index.md"
