@@ -6,13 +6,34 @@
   </div>
 
   {{ with .Params.bokningsurl }}
-  <p class="page__cta">
+  {{ $bokningsurl := . }}
+  <div class="page__cta">
     {{ if eq $.Params.bokning_aktiv false }}
     <span class="btn btn--disabled" aria-disabled="true">Bokning är stängd just nu</span>
     {{ else }}
-    <a class="btn btn--primary" href="{{ . }}">Boka shoppingtid</a>
+    {{ $u := urls.Parse $bokningsurl }}
+    {{ $origin := printf "%s://%s" $u.Scheme $u.Host }}
+    <div class="bokning">
+      <iframe src="{{ $bokningsurl }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p class="bokning__lank">
+      <a href="{{ $bokningsurl }}" target="_blank" rel="noopener">Öppna bokningen i ny flik →</a>
+    </p>
+    <p class="bokning__tack" id="bokning-tack" hidden>
+      Tack, din bokning är klar!
+    </p>
+    <script>
+      (function () {
+        var tack = document.getElementById("bokning-tack");
+        window.addEventListener("message", function (event) {
+          if (event.origin !== "{{ $origin }}" || !event.data || event.data.status !== "COMPLETE") return;
+          tack.hidden = false;
+          tack.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      })();
+    </script>
     {{ end }}
-  </p>
+  </div>
   {{ end }}
 
   {{ partial "galleri.html" (dict "page" . "bilder" .Params.bilder) }}

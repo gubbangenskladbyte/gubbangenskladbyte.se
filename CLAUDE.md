@@ -90,14 +90,19 @@ description: "..."
 ```
 
 Domänfält som förekommer:
-- `bokningsurl` — endast på `boka-shoppingtid`, länk till den
-  externa alf.io-bokningen (`bokning.gubbangenskladbyte.se`, egenhostad,
-  inte del av detta repo).
+- `bokningsurl` — endast på `boka-shoppingtid`, länk till den externa
+  alf.io-bokningen (`bokning.gubbangenskladbyte.se`, egenhostad, inte
+  del av detta repo). **Måste peka på ett specifikt event**
+  (`.../event/<eventShortName>`), inte instansens rotdomän — länken
+  bäddas in direkt på sidan (se nedan), och en direktlänk till eventet
+  ger besökaren noll extra klick. Uppdateras i CMS:et av redaktören
+  varje gång en ny bokningsrunda öppnas, samtidigt som `bokning_aktiv`
+  växlas.
 - `bokning_aktiv` — bool, endast på `boka-shoppingtid`. Styr bara
-  CTA-knappen (rendrad i `layouts/_default/single.html`), inte sidans
-  synlighet — det är `draft` som styr det. `false` byter ut länken mot
-  en inaktiverad `<span class="btn btn--disabled">`. Notera:
-  `eq $.Params.bokning_aktiv false` används istället för Hugos
+  CTA-blocket (rendrad i `layouts/_default/single.html`), inte sidans
+  synlighet — det är `draft` som styr det. `false` byter ut
+  bokningsblocket mot en inaktiverad `<span class="btn btn--disabled">`.
+  Notera: `eq $.Params.bokning_aktiv false` används istället för Hugos
   `default`-funktion, eftersom `default` behandlar `false` som ett tomt
   värde och skulle skriva över en avsiktlig `false` med `true`.
 - `varukategorier` — endast på startsidan, lista med produktkategorier.
@@ -231,6 +236,35 @@ Används på `bli-medarbetare` och `for-saljare`, som därför **inte**
 längre har ett `bilder`-fält i CMS:et — deras bilder (inklusive
 `for-saljare`s etikettbilder via `bild`-shortcoden) refereras alla
 direkt via shortcode-anrop i `body`, inget behöver listas separat.
+
+## Bokning (iframe-inbäddning)
+
+`layouts/_default/single.html` bäddar in alf.io-bokningen direkt på
+`boka-shoppingtid` istället för att bara länka ut till den, när
+`bokning_aktiv` är sann:
+
+- En `.bokning`-`<iframe>` pekar på `bokningsurl` (CSS i
+  `assets/css/components.css`, fast/generös höjd — alf.io skickar ingen
+  auto-resize-signal, så höjden kan inte anpassas dynamiskt efter
+  bokningsflödets steg).
+- En vanlig fallback-länk ("Öppna bokningen i ny flik") renderas alltid
+  under iframen, samma mönster som `karta`-shortcodens
+  "Visa vägbeskrivning"-länk.
+- Ett inline `<script>` i samma block är **den enda JavaScript-koden i
+  hela repot** (sajten är annars helt JS-fri). Det lyssnar på
+  `window.postMessage`-events från alf.io och visar ett eget
+  tack-meddelande (`#bokning-tack`) när en bokning slutförs
+  (`event.data.status === "COMPLETE"`). Origin valideras mot
+  `bokningsurl`s eget schema+host (`urls.Parse`, aldrig hårdkodad) så
+  koden inte tystnar om alf.io-domänen byts.
+- **Detta kräver konfiguration i alf.io:s adminpanel** (utanför detta
+  repo, egenhostad instans): systeminställningarna
+  `EMBED_ALLOWED_ORIGINS` och `EMBED_POST_MESSAGE_ORIGIN` måste båda
+  sättas till `https://gubbangenskladbyte.se`. Alf.io skickar annars
+  `X-Frame-Options: DENY`/CSP `frame-ancestors 'none'` på alla sidor
+  som standard och blockerar all inbäddning, och `postMessage` skickas
+  bara om `EMBED_POST_MESSAGE_ORIGIN` är satt. Se README.md, avsnittet
+  "Bokning", för fullständig checklista.
 
 ## Länkkonvention
 

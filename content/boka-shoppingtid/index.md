@@ -3,7 +3,7 @@ title: "Boka shoppingtid"
 date: 2026-08-30
 draft: false
 description: "Boka din shoppingtid inför nästa klädbyte."
-bokningsurl: "https://bokning.gubbangenskladbyte.se"
+bokningsurl: "https://bokning.gubbangenskladbyte.se/event/gb2026h?lang=sv"
 bokning_aktiv: false
 ---
 

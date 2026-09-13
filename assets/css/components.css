@@ -489,3 +489,32 @@
   margin-top: var(--space-2);
   font-size: 0.875rem;
 }
+
+/* bokning-iframe (boka-shoppingtid) */
+.bokning {
+  margin-top: var(--space-4);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.bokning iframe {
+  display: block;
+  width: 100%;
+  height: min(85vh, 1050px);
+  min-height: 550px;
+  border: 0;
+}
+
+.bokning__lank {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+}
+
+.bokning__tack {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: 600;
+  text-align: center;
+}

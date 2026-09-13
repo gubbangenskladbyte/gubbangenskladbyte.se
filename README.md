@@ -102,12 +102,19 @@ blocket igen för att redigera det senare.
 skilt från **Dold (utkast)**. Det styr bara själva knappen — resten av
 sidans text syns som vanligt oavsett:
 
-- **Ibockad** (standard): knappen visas som vanligt och länkar till
-  bokningssystemet.
-- **Urbockad**: knappen ersätts med en gråtonad, oklickbar text
+- **Ibockad** (standard): bokningen visas inbäddad direkt på sidan (en
+  ruta där man kan välja och betala biljetter utan att lämna sajten),
+  med en reservlänk ("Öppna bokningen i ny flik") under.
+- **Urbockad**: bokningsrutan ersätts med en gråtonad, oklickbar text
   ("Bokning är stängd just nu") — praktiskt när det inte går att köpa
   biljetter just nu, t.ex. mellan bytena eller när bokningen inte
   öppnat än, utan att behöva dölja hela sidan.
+
+**Bokningslänken måste peka på det specifika eventet** (t.ex.
+`https://bokning.gubbangenskladbyte.se/event/hostbytet-2026`), inte
+alf.io-startsidan — annars visas fel innehåll i bokningsrutan. Kom ihåg
+att uppdatera **Bokningslänk (alf.io)** varje gång ni öppnar en ny
+bokningsrunda, samtidigt som ni bockar i **Bokningsknapp aktiv**.
 
 ### Skriva och formatera text
 
@@ -240,5 +247,116 @@ Kvarstående steg innan sajten är skarp:
 
 Bokning av shoppingtider hanteras **inte** i detta repo. Det sker via en
 egenhostad [alf.io](https://alf.io/)-instans på
-`bokning.gubbangenskladbyte.se`. Länken till bokningen redigeras som
-ett vanligt textfält (`bokningsurl`) på sidan "Boka shoppingtid" i CMS:et.
+`bokning.gubbangenskladbyte.se` (Heroku). Bokningsflödet bäddas in
+direkt på sidan "Boka shoppingtid" i en iframe (se `CLAUDE.md`,
+avsnittet "Bokning (iframe-inbäddning)") — länken redigeras som ett
+vanligt textfält (`bokningsurl`) i CMS:et och måste peka på det
+**specifika eventet** (`.../event/<eventShortName>`), inte
+instansens startsida.
+
+**Krävs i alf.io:s adminpanel** för att inbäddningen ska fungera
+(systeminställningarna under "Embedding options"), annars blockerar
+alf.io all inbäddning som standard:
+
+| Inställning | Värde |
+|---|---|
+| `EMBED_ALLOWED_ORIGINS` | `https://gubbangenskladbyte.se` |
+| `EMBED_POST_MESSAGE_ORIGIN` | `https://gubbangenskladbyte.se` |
+
+Detta ligger helt utanför det här repot (separat Heroku-app) och måste
+sättas manuellt i alf.io:s admin-UI, precis som env-variablerna för
+GitHub OAuth nedan är en operationell förutsättning snarare än
+kodändringar.
+
+**Språk:** se till att **svenska** är aktiverat som språk på eventet
+(alf.io faller annars tillbaka på engelska för besökare vars
+webbläsarspråk inte matchar något aktiverat språk). Lägg dessutom till
+`?lang=sv` sist i `bokningsurl` som en extra säkerhet — den parametern
+vinner alltid över webbläsarens språkinställning:
+
+```
+https://bokning.gubbangenskladbyte.se/event/<eventShortName>?lang=sv
+```
+
+**Utseende:** eventets adminsida i alf.io har ett fält **"Event Custom
+CSS"** som injiceras direkt i bokningssidan (bara det eventet
+påverkas, inte hela alf.io-instansen). Klistra in följande för att
+dölja dubblerad logga/rubrik/länkar och matcha typsnitt/färger mot
+sajten:
+
+```css
+/* ===== Dölj element som dubblerar/pekar tillbaka till huvudsajten ===== */
+
+/* Header med logga, eventrubrik och språkväljare — visas redan på vår egen sida */
+app-purchase-context-header { display: none; }
+
+/* "Event info"-blocket (arrangör/datum/plats/kalenderlänkar) — står redan i vår löptext */
+app-event-summary { display: none; }
+
+/* Den lösa URL-raden direkt under headern (bara på toppnivå — INTE ticket-beskrivningar
+   längre ner, de återanvänder samma klass men ligger inte direkt under <main>) */
+main > .markdown-content { display: none; }
+
+/* De två kvarvarande linjerna som blev föräldralösa när ovanstående doldes.
+   Den tredje (.mt-5, precis ovanför knapparna) behålls som avskiljare. */
+main > hr:not(.mt-5) { display: none; }
+
+/* "Tillbaka till eventsidan"-knappen — länkar bara hit igen */
+div:has(> a[translate="to-event-site"]) { display: none; }
+
+/* Sidfotens villkorslänk — pekar också bara tillbaka till huvudsajten */
+app-footer-links { display: none; }
+
+/* ===== Matcha typsnitt/färger mot vår sajt ===== */
+
+app-root, body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+a { color: #2f7d5b; }
+a:hover { color: #245f45; }
+
+.btn-link { color: #2f7d5b; }
+
+.btn { border-radius: 0.5rem; }
+
+.btn-success {
+  background-color: #2f7d5b !important;
+  border-color: #2f7d5b !important;
+}
+
+.btn-success:hover {
+  background-color: #245f45 !important;
+  border-color: #245f45 !important;
+}
+
+main > h2 { text-align: center; font-weight: 700; }
+
+.alert { border-radius: 0.5rem; }
+
+/* ===== Scrollist inuti iframen ===== */
+html, body {
+  scrollbar-color: #2f7d5b #f2ece1;
+  scrollbar-width: thin;
+}
+body::-webkit-scrollbar { width: 10px; }
+body::-webkit-scrollbar-track { background: #f2ece1; }
+body::-webkit-scrollbar-thumb { background: #2f7d5b; border-radius: 8px; }
+```
+
+Färgvärdena (`#2f7d5b`/`#245f45`/`#f2ece1`) är hämtade rakt av från
+`assets/css/tokens.css` (`--color-primary`/`--color-primary-dark`/
+`--color-bg`) — går inte att referera CSS-variabler över origin-gränsen,
+så om de tokens någonsin ändras i den filen måste värdena uppdateras
+här manuellt också.
+
+**Viktigt att veta:** detta targetar alf.io:s interna Angular-
+komponentnamn och attribut (`app-event-summary`,
+`translate="to-event-site"` osv.) — inte ett dokumenterat/stabilt
+gränssnitt. Går sönder tyst (elementen dyker bara upp igen) om alf.io
+uppdateras och byter markup, inte hela sidan som slutar fungera.
+Testa om CSS:et fortfarande träffar rätt efter en alf.io-uppgradering.
+Selektorn för `.markdown-content` är medvetet avgränsad till `main >`
+eftersom biljettyper längre ner i flödet troligen återanvänder samma
+klass för sina egna beskrivningar — kontrollera det när fler
+biljettyper läggs till i eventet.
