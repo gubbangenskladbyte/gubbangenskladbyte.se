@@ -360,3 +360,126 @@ Selektorn för `.markdown-content` är medvetet avgränsad till `main >`
 eftersom biljettyper längre ner i flödet troligen återanvänder samma
 klass för sina egna beskrivningar — kontrollera det när fler
 biljettyper läggs till i eventet.
+
+**Max antal biljetter per e-postadress:** alf.io har ingen inbyggd
+inställning för detta (bara `MAX_AMOUNT_OF_TICKETS_BY_RESERVATION`,
+som bara begränsar en enskild bokning, inte upprepade bokningar med
+samma e-post). Lösningen är ett **Extension**-script (admin →
+Extensions), kopplat till händelsen `RESERVATION_VALIDATION`, som
+slår upp befintliga bekräftade biljetter för e-postadressen via
+alf.io:s eget `download-attendees`-API och avvisar bokningen om
+gränsen skulle överskridas:
+
+```js
+function getScriptMetadata() {
+    return {
+        id: 'limitTicketsPerEmail',
+        displayName: 'Begransa antal biljetter per e-post',
+        version: 2,
+        async: false,
+        events: [
+            'RESERVATION_VALIDATION'
+        ],
+        parameters: {
+            fields: [
+                { name: 'maxTicketsPerEmail', description: 'Max antal biljetter per e-postadress', type: 'TEXT', required: true },
+                { name: 'apiKey', description: 'Alf.io Organization API-nyckel', type: 'TEXT', required: true },
+                { name: 'limitReleaseAt', description: 'Tidpunkt da sparren slapps, ISO 8601 med tidszon, t.ex. 2026-10-15T15:00:00+02:00. Lamna tomt for att aldrig slappa sparren.', type: 'TEXT', required: false }
+            ],
+            configurationLevels: ['EVENT']
+        }
+    };
+}
+
+function executeScript(scriptEvent) {
+    var releaseAt = extensionParameters.limitReleaseAt;
+    if (releaseAt) {
+        var releaseDate = new Date(releaseAt);
+        if (!isNaN(releaseDate.getTime()) && new Date().getTime() >= releaseDate.getTime()) {
+            log.warn('Sparren for max antal biljetter per e-post ar slappt (releaseAt: ' + releaseAt + ')');
+            return;
+        }
+    }
+
+    var maxTickets = parseInt(extensionParameters.maxTicketsPerEmail, 10);
+    var apiKey = extensionParameters.apiKey;
+    var form = scriptEvent.form;
+    var bindingResult = scriptEvent.bindingResult;
+
+    if (!form.email) {
+        return;
+    }
+    var email = form.email.trim().toLowerCase();
+
+    var url = 'https://bokning.gubbangenskladbyte.se/api/v1/admin/event/' + event.getShortName() + '/download-attendees';
+    var response = simpleHttpClient.get(url, { 'Authorization': 'ApiKey ' + apiKey });
+    var categories = response.getJsonBody();
+
+    var existingCount = 0;
+    for (var i = 0; i < categories.size(); i++) {
+        var attendees = categories.get(i).getAsJsonObject().get('attendees').getAsJsonArray();
+        for (var j = 0; j < attendees.size(); j++) {
+            var attendeeEmail = attendees.get(j).getAsJsonObject().get('email').getAsString();
+            if (attendeeEmail && attendeeEmail.toLowerCase() === email) {
+                existingCount++;
+            }
+        }
+    }
+
+    var ticketsInThisReservation = form.tickets ? Object.keys(form.tickets).length : 1;
+
+    log.warn('Existing tickets for ' + email + ': ' + existingCount + ', in this reservation: ' + ticketsInThisReservation);
+
+    if (existingCount + ticketsInThisReservation > maxTickets) {
+        bindingResult.reject('error.max-tickets-per-email',
+            'Den har e-postadressen har redan bokat max antal biljetter (' + maxTickets + ').');
+    }
+}
+```
+
+**Ny parameter `limitReleaseAt`:** valfritt fält, ISO 8601-tidsstämpel
+**med explicit tidszon** (t.ex. `2026-10-15T15:00:00+02:00` för
+svensk sommartid/CEST — utan tidszonen tolkas tiden i serverns egen
+tidszon, troligen UTC på Heroku, vilket ger fel klockslag). Så fort
+serverns aktuella tid passerat detta värde hoppar scriptet över hela
+kontrollen och släpper igenom bokningar utan begränsning. Lämnas
+fältet tomt gäller begränsningen tills vidare (fail-safe — en tom
+eller ogiltig tidsstämpel tolkas som "spärren är alltid aktiv", inte
+tvärtom).
+
+**Namnet i "Add Extension"-formuläret** (den tredje rutan i
+"Path"-raden, efter organisation/event) måste bestå av **bara
+bokstäver och siffror** (`^[A-Za-z0-9]+$`, alf.io tillåter varken
+bindestreck, understreck eller mellanslag där) — använd t.ex.
+`limitTicketsPerEmail`. Klistra in **hela** scriptet i kodrutan i ett
+svep (markera allt och radera först) — en delvis redigering av
+standardmallen lämnar lätt kvar en klammerparentes från exempelkoden
+och ger "Syntax error in script ...".
+
+**Konfiguration efter installation (fylla i `maxTicketsPerEmail` och
+`apiKey`):** dessa fält dyker **inte** upp på samma sida som
+scriptet skrevs in på ("Extensions"), utan på eventets vanliga
+**Configuration**-sida i admin — samma ställe som språkinställningen
+och "Event Custom CSS" — under en egen sektion med scriptets
+`displayName` ("Begransa antal biljetter per e-post") som rubrik.
+`apiKey` ska vara en **Organization API-nyckel** (rollen visas som
+"API Client" i admin, se ovan) — en helt separat nyckel från
+`EMBED_*`-inställningarna.
+
+**Kända begränsningar, testa innan skarpt bruk:**
+- `download-attendees` returnerar bara **bekräftade** biljetter — två
+  samtidigt pågående (obekräftade) bokningar med samma e-post fångas
+  inte av det här scriptet.
+- Hook-kontraktet (`RESERVATION_VALIDATION`, `form.email`,
+  `bindingResult.reject`) och API-endpointen/auth-headern
+  (`Authorization: ApiKey ...`) är verifierade direkt mot alf.io:s
+  källkod, men själva GSON-traverseringen (`getAsJsonObject`/
+  `getAsJsonArray`) är inte körd mot en skarp instans — testa med en
+  riktig testbokning (boka en gång, boka igen med samma e-post) och
+  kontrollera extension-loggen innan ni litar på scriptet för en
+  verklig bokningsrunda.
+- Svenska tecken (å/ä/ö) i scriptets kommentarer/loggtext undveks
+  medvetet efter ett "Syntax error"-fel vid sparande (oklart om det
+  var den faktiska orsaken eller en delvis inklistrad mall, se ovan,
+  men ASCII-varianten fungerade). Felmeddelandet till slutanvändaren
+  (`bindingResult.reject`) fungerade fint med svenska tecken kvar.
