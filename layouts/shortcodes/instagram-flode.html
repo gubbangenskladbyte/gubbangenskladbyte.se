@@ -1,0 +1,17 @@
+{{ $antal := .Get "antal" | default "6" }}
+{{ $centrerad := .Get "centrerad" | default "false" }}
+<section class="instagram-flode{{ if eq $centrerad "true" }} instagram-flode--center{{ end }}">
+  <h2 class="instagram-flode__heading">Följ oss på Instagram</h2>
+  {{ with hugo.Data.instagram }}
+  <div class="instagram-flode__grid">
+    {{ range first (int $antal) . }}
+    <a class="instagram-flode__item" href="{{ .permalink }}" target="_blank" rel="noopener">
+      <img src="{{ .bild_url }}" alt="" loading="lazy">
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+  <p class="page__cta">
+    <a class="btn btn--primary" href="{{ .Page.Site.Params.instagram }}" target="_blank" rel="noopener">Följ oss på Instagram</a>
+  </p>
+</section>

@@ -1,0 +1,92 @@
+name: Synka Instagram-flöde
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # dagligen, 05:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checka ut repot
+        uses: actions/checkout@v4
+
+      - name: Hämta senaste inlägg från Instagram Graph API
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          curl -sS -G "https://graph.facebook.com/v20.0/${IG_USER_ID}/media" \
+            --data-urlencode "fields=id,media_type,media_url,permalink,thumbnail_url,timestamp" \
+            --data-urlencode "limit=12" \
+            --data-urlencode "access_token=${IG_ACCESS_TOKEN}" \
+            -o raw-media.json
+
+          # Fel från Graph API kommer som ett "error"-objekt istället för "data" — avbryt
+          # tydligt istället för att skriva ett trasigt/tomt data/instagram.json.
+          if jq -e '.error' raw-media.json > /dev/null; then
+            echo "::error::Graph API returnerade ett fel:"
+            cat raw-media.json
+            exit 1
+          fi
+
+          mkdir -p data
+          jq '[.data[] | {
+            id: .id,
+            permalink: .permalink,
+            bild_url: (if .media_type == "VIDEO" then .thumbnail_url else .media_url end),
+            typ: (if .media_type == "VIDEO" then "video" else "bild" end),
+            datum: (.timestamp | split("T")[0])
+          }]' raw-media.json > data/instagram.json
+          rm raw-media.json
+
+      - name: Förnya långlivad access-token
+        id: refresh_token
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_APP_ID: ${{ secrets.IG_APP_ID }}
+          IG_APP_SECRET: ${{ secrets.IG_APP_SECRET }}
+        run: |
+          set -euo pipefail
+          # Byter ut den nuvarande token mot en ny långlivad token (~60 dagar) via
+          # Metas fb_exchange_token-flöde. Körs varje dygn så token aldrig hinner
+          # gå ut även om ett enstaka körning misslyckas.
+          response=$(curl -sS -G "https://graph.facebook.com/v20.0/oauth/access_token" \
+            --data-urlencode "grant_type=fb_exchange_token" \
+            --data-urlencode "client_id=${IG_APP_ID}" \
+            --data-urlencode "client_secret=${IG_APP_SECRET}" \
+            --data-urlencode "fb_exchange_token=${IG_ACCESS_TOKEN}")
+
+          if ! echo "$response" | jq -e '.access_token' > /dev/null; then
+            echo "::warning::Kunde inte förnya access-token, behåller nuvarande. Svar: $response"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "new_token=$(echo "$response" | jq -r '.access_token')" >> "$GITHUB_OUTPUT"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Spara ny token som repo-hemlighet
+        if: steps.refresh_token.outputs.skip == 'false'
+        uses: gliech/create-github-secret-action@v1
+        with:
+          name: IG_ACCESS_TOKEN
+          value: ${{ steps.refresh_token.outputs.new_token }}
+          pa_token: ${{ secrets.REPO_ADMIN_TOKEN }}
+
+      - name: Committa data/instagram.json vid ändring
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/instagram.json; then
+            echo "Inga nya inlägg, hoppar över commit."
+          else
+            git add data/instagram.json
+            git commit -m "Uppdatera Instagram-flöde"
+            git push
+          fi

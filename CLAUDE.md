@@ -126,7 +126,7 @@ visas dubbelt. Varje `src` provas först som extern URL
 
 ## Shortcodes (`layouts/shortcodes/`)
 
-Alla fyra kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan
+Alla fem kräver `unsafe = true` i `hugo.toml`s goldmark-config (redan
 satt) och har en motsvarande **Sveltia CMS "Editor Component"**
 registrerad i `static/admin/index.html` — en knapp i verktygsfältet
 ovanför **Innehåll**-fältet som öppnar ett formulär istället för att
@@ -232,6 +232,35 @@ längre har ett `bilder`-fält i CMS:et — deras bilder (inklusive
 `for-saljare`s etikettbilder via `bild`-shortcoden) refereras alla
 direkt via shortcode-anrop i `body`, inget behöver listas separat.
 
+### `instagram-flode` — senaste inläggen från Instagram
+
+```
+{{< instagram-flode antal="6" centrerad="false" >}}
+```
+
+Renderar en rubrik ("Följ oss på Instagram"), ett rutnät med de `antal`
+senaste inläggen (kvadratiska 6rem-miniatyrer, `.instagram-flode__grid`,
+länkar ut till respektive inlägg på instagram.com) och en
+CTA-knapp mot `params.instagram` (`hugo.toml`). `antal` styr hur många
+inlägg som visas (standard 6). `centrerad` (`true`/`false`, standard
+`false`) lägger till modifieraren `.instagram-flode--center` på
+sektionen, som centrerar både bildrutnätet (`justify-content: center`)
+och CTA-knappen — annars vänsterställs de, i linje med hur
+`.page__cta` beter sig på övriga sidor. Se "Instagram-flöde"-avsnittet
+nedan för var datan kommer ifrån.
+
+Till skillnad från de andra fyra shortcodes ovan är denna **inte**
+knuten till en specifik sida — redaktören lägger in den i valfri
+sidas/inläggs `body`-innehåll (och tar bort den igen) precis som `bild`
+eller `citat`, och avgör själv var på sidan den hamnar genom var i
+texten shortcode-raden placeras. **Används för närvarande inte på
+någon sida** — Instagram-kontot är ännu inte konverterat till ett
+Business/Creator-konto (se "Instagram-flöde" nedan), så
+`data/instagram.json` finns inte i produktion än. Komponenten och hela
+hämtningskedjan är klara att tas i bruk (av en redaktör i CMS:et, eller
+genom att lägga till anropet i valfri `content/*.md`-fil) så fort
+kontot är konverterat och hemligheterna finns på plats.
+
 ## Länkkonvention
 
 - **Interna länkar: alltid relativa** (`.RelPermalink`/`.URL`), aldrig
@@ -275,6 +304,40 @@ popup-OAuth-protokollet:
 i **båda** filerna — måste matcha exakt vad som är registrerat i GitHub
 OAuth-appen. Kräver miljövariablerna `GITHUB_OAUTH_CLIENT_ID` och
 `GITHUB_OAUTH_CLIENT_SECRET` i Cloudflare Pages (aldrig committade).
+
+## Instagram-flöde (`.github/workflows/instagram-sync.yml`)
+
+`instagram-flode`-shortcoden (se "Shortcodes" ovan) visar de senaste
+inläggen från `@gubbangens_barnkladesbyte`. Eftersom sajten är helt
+statisk hämtas inläggen **inte** vid sidladdning eller byggtid mot
+Instagrams API — ett schemalagt GitHub Action (`instagram-sync.yml`,
+dagligen) hämtar senaste inläggen via Instagram Graph API och committar
+resultatet till `data/instagram.json`. Den commiten är det som faktiskt
+triggar Cloudflare Pages-ombygget; själva Hugo-bygget läser bara filen
+som vanlig `hugo.Data.instagram` (inte `.Site.Data`, som är deprecerat
+sedan Hugo v0.156).
+
+- `data/instagram.json` skrivs **aldrig för hand** — den genereras och
+  committas enbart av workflowet. Filen kan saknas (t.ex. i en färsk
+  klon innan workflowet körts första gången) — shortcoden hanterar det
+  genom att bara hoppa över bildrutnätet (`{{ with hugo.Data.instagram
+  }}`) och alltid visa en "Följ oss på Instagram"-CTA-knapp mot
+  `params.instagram` (`hugo.toml`) istället.
+- Om Graph API-anropet i workflowet misslyckas (utgången token,
+  rate-limit, Meta-driftstopp) rörs `data/instagram.json` inte — inget
+  committas, så sajten fortsätter bygga med senast kända flöde istället
+  för att få ett trasigt bygge.
+- **Kräver att Instagram-kontot är ett Business- eller Creator-konto
+  kopplat till en Facebook-sida** — ett administrativt krav från Meta för
+  Graph API-åtkomst, inte något som kan lösas i kod.
+- Workflowet förnyar access-token varje körning (Metas
+  `fb_exchange_token`-flöde) och skriver tillbaka den nya token som
+  GitHub-hemligheten `IG_ACCESS_TOKEN` via `gliech/create-github-secret-action`,
+  så token aldrig hinner gå ut (~60 dagar) även om ingen manuellt håller
+  koll. Detta kräver en extra hemlighet, `REPO_ADMIN_TOKEN` (en PAT med
+  behörighet att skriva repo-hemligheter) utöver `IG_USER_ID`,
+  `IG_ACCESS_TOKEN`, `IG_APP_ID` och `IG_APP_SECRET` — samtliga sätts i
+  GitHub Actions repo-hemligheter, aldrig i sajtens kod.
 
 ## Repo-läge
 

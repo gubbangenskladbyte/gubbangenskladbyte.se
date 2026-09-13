@@ -153,6 +153,36 @@
             : ''
         }</div>`,
     });
+
+    window.CMS.registerEditorComponent({
+      id: 'instagram-flode',
+      label: 'Instagram-flöde',
+      icon: 'photo_camera',
+      fields: [
+        {
+          name: 'antal',
+          label: 'Antal bilder',
+          widget: 'number',
+          value_type: 'int',
+          min: 1,
+          max: 12,
+          default: 6,
+        },
+        {
+          name: 'centrerad',
+          label: 'Centrerade bilder',
+          widget: 'boolean',
+          default: false,
+        },
+      ],
+      pattern: /{{< instagram-flode antal="(?<antal>.*?)" centrerad="(?<centrerad>.*?)" >}}/,
+      toBlock: ({ antal, centrerad }) =>
+        `{{< instagram-flode antal="${antal || 6}" centrerad="${centrerad || false}" >}}`,
+      toPreview: ({ antal, centrerad }) =>
+        `<div style="padding:1rem 1.25rem;background:#f5f7f6;border:1px solid #e4e7eb;border-radius:8px;text-align:${
+          centrerad === true || centrerad === 'true' ? 'center' : 'left'
+        };">📷 Instagram-flöde (${antal || 6} bilder, hämtas automatiskt)</div>`,
+    });
   </script>
 </body>
 </html>
