@@ -1,10 +1,14 @@
 {{ define "main" }}
 <h1 class="visually-hidden">{{ .Title }}</h1>
 
+{{ $bilder := .Params.bilder }}
+{{ $bildtext := dict }}
+{{ range $bilder }}{{ $bildtext = merge $bildtext (dict .src .bildtext) }}{{ end }}
+
 {{ with .Resources.GetMatch "gubbis1.jpg" }}
 {{ $banner := .Fill "1600x480 Center" }}
 <div class="banner">
-  <img class="banner__img" src="{{ $banner.RelPermalink }}" width="{{ $banner.Width }}" height="{{ $banner.Height }}" alt="">
+  <img class="banner__img" src="{{ $banner.RelPermalink }}" width="{{ $banner.Width }}" height="{{ $banner.Height }}" alt="{{ index $bildtext "gubbis1.jpg" | default "" }}">
 </div>
 {{ end }}
 
@@ -26,20 +30,11 @@
   {{ end }}
   {{ with .Resources.GetMatch "gubbis2.jpg" }}
   <div class="varor-row__image">
-    <img src="{{ .RelPermalink }}" alt="" loading="lazy">
+    <img src="{{ .RelPermalink }}" alt="{{ index $bildtext "gubbis2.jpg" | default "" }}" loading="lazy">
   </div>
   {{ end }}
 </section>
 
-{{ $images := .Resources.ByType "image" }}
-{{ $extra := where $images "Name" "not in" (slice "gubbis1.jpg" "gubbis2.jpg") }}
-{{ with $extra }}
-<section class="galleri">
-  <div class="galleri__grid">
-    {{ range . }}
-    <img class="galleri__img" src="{{ .RelPermalink }}" alt="" loading="lazy">
-    {{ end }}
-  </div>
-</section>
-{{ end }}
+{{ $extra := where $bilder "src" "not in" (slice "gubbis1.jpg" "gubbis2.jpg") }}
+{{ partial "galleri.html" (dict "page" . "bilder" $extra) }}
 {{ end }}

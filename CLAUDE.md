@@ -31,7 +31,16 @@ Bygget skriver till `public/` (gitignorat).
   togs bort). `layouts/blogg/` har sektionsspecifika overrides
   (`list.html` med paginering, `single.html` med datum).
 - `layouts/index.html` styr startsidan (hero + introtext + varukategorier
-  + ev. bilder).
+  + ev. bilder). Bannerbilden (`gubbis1.jpg`) och bilden bredvid
+  varukategorierna (`gubbis2.jpg`) slås upp direkt via filnamn
+  (`.Resources.GetMatch`) eftersom de har egen layout/beskärning, men
+  deras `alt`-text hämtas från matchande `bildtext` i `.Params.bilder`
+  — samma fält som redaktören redan fyller i i CMS:et. Eventuella
+  ytterligare bilder i `bilder`-listan (utöver de två namngivna)
+  renderas via `partial "galleri.html"`, precis som på andra sidor —
+  en bild som laddas upp men inte listas i `bilder` visas alltså
+  **inte** på startsidan heller (det stämmer nu även i praktiken, inte
+  bara i teorin).
 - `layouts/partials/` innehåller `head.html` (meta/OG/CSS-pipeline),
   `header.html`, `footer.html`, samt `svensk-datum.html` — en liten
   hjälppartial som formaterar datum med svenska månadsnamn, eftersom
