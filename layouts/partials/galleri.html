@@ -12,7 +12,7 @@
   {{ end }}
   {{ if $url }}
   <figure class="galleri__item">
-    <img class="galleri__img" src="{{ $url }}" alt="" loading="lazy">
+    <img class="galleri__img" src="{{ $url }}" alt="{{ .bildtext | default "" }}" loading="lazy">
     {{ with .bildtext }}<figcaption class="galleri__caption">{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}

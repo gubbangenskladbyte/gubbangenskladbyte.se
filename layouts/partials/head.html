@@ -8,10 +8,27 @@
   <link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png">
   <link rel="apple-touch-icon" href="{{ "favicon.png" | relURL }}">
 
+  {{ $ogImage := "" }}
+  {{ with .Params.bilder }}
+    {{ $src := (index . 0).src }}
+    {{ if or (hasPrefix $src "http://") (hasPrefix $src "https://") }}
+      {{ $ogImage = $src }}
+    {{ else }}
+      {{ with $.Resources.GetMatch $src }}{{ $ogImage = .Permalink }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $ogImage) .IsHome }}
+    {{ with .Resources.GetMatch "gubbis1.jpg" }}{{ $ogImage = .Permalink }}{{ end }}
+  {{ end }}
+  {{ if not $ogImage }}
+    {{ $ogImage = "logga.png" | absURL }}
+  {{ end }}
+
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $description }}">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ $ogImage }}">
 
   {{ with .OutputFormats.Get "RSS" }}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
