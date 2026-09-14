@@ -375,7 +375,7 @@ function getScriptMetadata() {
     return {
         id: 'limitTicketsPerEmail',
         displayName: 'Begransa antal biljetter per e-post',
-        version: 2,
+        version: 3,
         async: false,
         events: [
             'RESERVATION_VALIDATION'
@@ -403,8 +403,6 @@ function executeScript(scriptEvent) {
 
     var maxTickets = parseInt(extensionParameters.maxTicketsPerEmail, 10);
     var apiKey = extensionParameters.apiKey;
-    var form = scriptEvent.form;
-    var bindingResult = scriptEvent.bindingResult;
 
     if (!form.email) {
         return;
@@ -483,3 +481,14 @@ och "Event Custom CSS" — under en egen sektion med scriptets
   var den faktiska orsaken eller en delvis inklistrad mall, se ovan,
   men ASCII-varianten fungerade). Felmeddelandet till slutanvändaren
   (`bindingResult.reject`) fungerade fint med svenska tecken kvar.
+- **`scriptEvent`-parametern till `executeScript(scriptEvent)` är bara
+  händelsenamnet som sträng** (t.ex. `"RESERVATION_VALIDATION"`), inte
+  ett objekt med `.form`/`.bindingResult`-fält. Alla dokumenterade
+  "scope-variabler" (`form`, `reservation`, `bindingResult`,
+  `extensionParameters`, `event` m.fl.) är egna globala variabler i
+  scriptets scope, inte fält på `scriptEvent` — verifierat mot alf.io:s
+  källkod (`ScriptingExecutionService.java`) och deras egna
+  exempel-scripts, som aldrig använder `scriptEvent.*`. Ett tidigt
+  utkast läste `scriptEvent.form`/`scriptEvent.bindingResult` och
+  kraschade i produktion med `Cannot read property "email" from
+  undefined` — koden nedan använder `form`/`bindingResult` direkt.
