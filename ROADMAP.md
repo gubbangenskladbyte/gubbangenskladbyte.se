@@ -15,10 +15,14 @@ därmed i drift.
 
 **Next:**
 1. Ge redaktörerna skrivbehörighet i org-repot (om inte redan gjort).
-2. Sätt upp `bokning.gubbangenskladbyte.se` (alf.io).
-3. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
+2. Låt redaktörerna läsa igenom och godkänna de omskrivna texterna
    (se "Innehåll" nedan).
-4. Avsluta/redirecta gamla wordpress.com-sajten när ni är redo.
+3. Avsluta/redirecta gamla wordpress.com-sajten när ni är redo.
+4. Skicka det författade meddelandet till Instagram/Facebook-ansvarig
+   (företagskonto + koppling till Facebook-sidan) och invänta
+   engångsgodkännandet.
+5. Bygg Instagram-tokenförnyelsen (Cloudflare Worker + KV) och
+   visningsflödet på sajten (se "Instagram-integration" nedan).
 
 ## Status
 
@@ -61,11 +65,58 @@ därmed i drift.
       Hugo-bygget (29 sidor) och OAuth-proxyn (`functions/`) kompilerades
       och deployades utan fel
 
-### Bokning (extern, alf.io)
-- [ ] `bokning.gubbangenskladbyte.se` uppsatt och driftsatt (utanför
-      detta repo)
-- [ ] `bokningsurl`-fältet på "Boka shoppingtid" pekar mot skarp
-      instans
+### Bokning (alf.io)
+- [x] `bokning.gubbangenskladbyte.se` uppsatt och driftsatt (utanför
+      detta repo, Heroku)
+- [x] Bokningen inbäddad via iframe på "Boka shoppingtid" istället för
+      att bara länka ut (se CLAUDE.md, "Bokning (iframe-inbäddning)")
+- [x] `EMBED_ALLOWED_ORIGINS`/`EMBED_POST_MESSAGE_ORIGIN` satta i
+      alf.io-admin så inbäddning/postMessage tillåts
+- [x] Svenska aktiverat som språk på eventet + `?lang=sv` i
+      `bokningsurl` som extra säkerhet
+- [x] "Event Custom CSS" i alf.io matchat mot sajtens utseende
+      (dölj dubblerad logga/header, matcha färger/typsnitt — se
+      README.md, avsnittet "Bokning")
+- [x] Extension-script för max antal biljetter per e-postadress
+      (`RESERVATION_VALIDATION`-hook, valfri tidsparameter för att
+      släppa spärren automatiskt — se README.md, avsnittet "Bokning")
+- [ ] `bokningsurl` uppdateras till rätt specifikt event **inför varje
+      ny bokningsrunda** (återkommande uppgift, inte en engångscheckbox)
+- [ ] `maxTicketsPerEmail`/`apiKey`/ev. `limitReleaseAt` ifyllda på
+      eventets Configuration-sida inför skarp bokningsrunda
+
+### SEO
+- [x] Alt-text i galleribilder — `bilder`-fältets `bildtext`
+      återanvänds nu som `alt`, både i `partial "galleri.html"` och på
+      startsidan
+- [x] `og:image` för länkförhandsvisning (sidans egen bild →
+      startsidans banner → loggan som sista fallback)
+- [x] `Sitemap:`-rad tillagd i `robots.txt`
+- [x] Bing Webmaster Tools-verifiering (`static/BingSiteAuth.xml`)
+- [ ] Fylla i Bildtext för startsidans banner-/kategoribild
+      (`gubbis1.jpg`/`gubbis2.jpg`) i CMS:et — mekaniken finns, texten
+      saknas än
+- [ ] (Valfritt) Strukturerad data (JSON-LD, `Organization`/
+      `LocalBusiness`) för rikare Google-resultat — inte byggt
+
+### Instagram-integration (ej påbörjad)
+Mål: visa de senaste Instagram-inläggen automatiskt på sajten.
+- [ ] Skicka meddelande till Instagram/Facebook-ansvarig: verifiera
+      företagskonto (Business) + koppling till Facebook-sidan
+      (meddelande författat, ej skickat)
+- [ ] Engångsgodkännande av åtkomst via Meta/Facebook-inloggning
+- [ ] Skapa Meta Developer-app (App ID/Secret) för Instagram Graph API
+- [ ] Bygg en **fristående Cloudflare Worker** med cron-trigger som
+      förnyar access-token med marginal (t.ex. varje vecka) —
+      **Cloudflare Pages Functions saknar cron-stöd** (verifierat mot
+      Cloudflares dokumentation), så det kan inte ligga i `functions/`
+      utan måste deployas separat via `wrangler`
+- [ ] Cloudflare KV-lagring för aktuell token, delad mellan
+      förnyelse-Workern och sajtens visningsflöde
+- [ ] Pages Function i det här repot som hämtar Instagram-flödet åt
+      sajten med token från KV
+- [ ] Frontend-komponent som visar flödet på sajten (blir sajtens
+      andra JS-kod, se CLAUDE.md om `bokning`-scriptet som den första)
 
 ### Domän
 - [x] Domänen tillagd i Cloudflare (Connect, inte Transfer —
