@@ -1,10 +1,10 @@
 ---
-title: "Boka shoppingtid"
-date: 2026-08-30
+title: Boka shoppingtid
 draft: false
-description: "Boka din shoppingtid inför nästa klädbyte."
-bokningsurl: "https://bokning.gubbangenskladbyte.se/event/gb2026h?lang=sv"
-bokning_aktiv: false
+description: Boka din shoppingtid inför nästa klädbyte.
+bokningsurl: https://bokning.gubbangenskladbyte.se/event/gb2026h?lang=sv
+bokning_aktiv: true
+date: 2026-08-30
 ---
 
 Under pandemin började vi med förbokade shoppingtider, för att vi skulle kunna ha öppet. Detta föll väl ut och våra besökare och medarbetare uppskattade det väldigt mycket, därför har vi valt att fortsätta med det — det är nu det nya normala för vårt barnklädesbyte.
@@ -36,7 +36,7 @@ Vi har ingen kölista. Så snart en tid bokas av dyker den upp igen på boknings
 - Barn under 6 år kan bokas på passen från kl. 12:00 (undantag barn i sele — de räknas som ett med den som bär det)
 - Bokningen är personlig och QR-koden måste visas upp i dörren på bytet
 
-*I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte.*
+_I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte._
 
 Mvh,
 Gubbängens barnklädesbyte
