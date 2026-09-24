@@ -3,7 +3,7 @@ title: Boka shoppingtid
 draft: false
 description: Boka din shoppingtid inför nästa klädbyte.
 bokningsurl: https://bokning.gubbangenskladbyte.se/event/gb2026h?lang=sv
-bokning_aktiv: true
+bokning_aktiv: false
 date: 2026-08-30
 ---
 
@@ -37,6 +37,3 @@ Vi har ingen kölista. Så snart en tid bokas av dyker den upp igen på boknings
 - Bokningen är personlig och QR-koden måste visas upp i dörren på bytet
 
 _I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte._
-
-Mvh,
-Gubbängens barnklädesbyte
