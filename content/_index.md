@@ -9,7 +9,7 @@ varukategorier:
   - Barnskor
   - Leksaker & pyssel
   - Barninredning
-  - Böcker & spel
+  - Böcker,  pussel & spel
   - Cyklar/pulkor/hjälmar
   - Ytterkläder efter säsong
   - Fotbollsskor och skydd
