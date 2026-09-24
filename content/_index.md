@@ -7,16 +7,16 @@ varukategorier:
   - Barnkläder strl 44–176 (XXS–S)
   - Ungdomskläder strl S–L
   - Barnskor
-  - Leksaker, väskor, pyssel
+  - Leksaker & pyssel
   - Barninredning
-  - Böcker och spel
+  - Böcker & spel
   - Cyklar/pulkor/hjälmar
   - Ytterkläder efter säsong
   - Fotbollsskor och skydd
   - Sportutrustning
   - Utklädningskläder
   - Mindre utbud av vuxenkläder
-  - Bästa fikat i stan!
+  - Väskor
 bilder:
   - src: gubbis1.jpg
     bildtext: Bord med sorterade leksaker och kläder på Gubbängens Barnklädesbyte, med en banderoll med föreningens namn i taket
