@@ -18,8 +18,8 @@ varukategorier:
   - Mindre utbud av vuxenkläder
   - Väskor
 bilder:
-  - src: gubbis1.jpg
-    bildtext: Bord med sorterade leksaker och kläder på Gubbängens Barnklädesbyte, med en banderoll med föreningens namn i taket
+  - src: 574015731_10173016965265274_3074273454752953325_n.jpg
+    bildtext: ''
   - src: bb5aaa04-676c-422d-9461-99c90fc78fe3.jpg
     bildtext: 'Bildkollage från klädbytet: Pussel & spel, skor, leksaker och inredning'
 date: 2026-08-30
