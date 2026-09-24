@@ -10,7 +10,7 @@ varukategorier:
   - Leksaker & pyssel
   - Barninredning
   - Böcker,  pussel & spel
-  - Cyklar/pulkor/hjälmar
+  - Cyklar/pulkor/hjälmar/ kikbikes
   - Ytterkläder efter säsong
   - Fotbollsskor och skydd
   - Sportutrustning
@@ -18,7 +18,6 @@ varukategorier:
   - Mindre utbud av vuxenkläder
   - Väskor
   - Barnvagnar
-  - Cyklar & Kikbikes
   - Bebissaker (bärsele, skötunderlägg, filtar, bäddset,åkpåse)
 bilder:
   - src: gubbis1.jpg
