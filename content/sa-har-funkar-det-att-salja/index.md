@@ -1,8 +1,9 @@
 ---
-title: "Så här funkar det att sälja"
-date: 2026-08-30
+title: Så här funkar det att sälja
 draft: false
-description: "Steg för steg: så går det till att sälja barnkläder och barnsaker hos oss."
+description: 'Steg för steg: så går det till att sälja barnkläder och barnsaker hos oss.'
+bilder: []
+date: 2026-08-30
 ---
 
 För den som är intresserad av att sälja kläder/saker på våra storlekssorterade barn- och ungdomsloppisar så funkar det i korta drag så här:
@@ -15,15 +16,14 @@ För den som är intresserad av att sälja kläder/saker på våra storlekssorte
 - **Viktigt** att bekräfta med vändande mejl att säljnumret kommit fram!
 - Varje säljare sorterar, prissätter och märker själv upp sina saker och lämnar in dem dagen före bytet på angiven tid
 - Vi medarbetare packar sedan upp allting åt alla säljare — allt storlekssorteras på bord och ställningar, och vissa saker sorteras efter typ av vara, t.ex. sport- och regnkläder
-- På själva loppisdagen kommer de som har bokat shoppingtid till oss och handlar, och förhoppningsvis hittar de då bra saker och gör fina fynd
+- På själva loppisdagen kommer de som har bokat shoppingtid till oss och handlar.
 - Vid bytesdagens slut sorteras det som inte sålts ner i påsar igen och säljarna hämtar upp sina osålda saker på angiven tid, och får betalt för det som sålts
 
 **Välkommen med ditt mejl till:** [gubbangenskladbyte@gmail.com](mailto:gubbangenskladbyte@gmail.com)
 
-{{< bild src="humanbridge-1.jpg" alt="Human Bridge" storlek="liten" position="höger" >}}
+{{< bild src="" alt="Human Bridge" storlek="liten" position="höger" >}}
 
 Det finns möjlighet att "kryssa" plagg och saker — det innebär att om de inte blir sålda så skänks de istället till välgörande ändamål. Vi är otroligt glada och stolta över vårt samarbete med Human Bridge, som hämtar allt som skänks av säljarna i samband med klädbytet. Läs mer på [humanbridge.se](http://www.humanbridge.se).
-
 
 <br>
 <br>
