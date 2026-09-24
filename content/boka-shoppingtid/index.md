@@ -7,9 +7,7 @@ bokning_aktiv: true
 date: 2026-08-30
 ---
 
-Under pandemin började vi med förbokade shoppingtider, för att vi skulle kunna ha öppet. Detta föll väl ut och våra besökare och medarbetare uppskattade det väldigt mycket, därför har vi valt att fortsätta med det — det är nu det nya normala för vårt barnklädesbyte.
-
-Det innebär att **alla** som besöker bytet måste ha fått en bekräftelse på sin bokade tid för att släppas in (gäller även barn). Barn under 6 år är välkomna på passen från kl. 12:00 och framåt, de måste också föranmälas. Om barn följer med är det viktigt för oss att ni har uppsikt över dem — det är inte okej att de hänger kvar vid leksakerna och leker där medan ni själva shoppar på andra ställen.
+Alla som besöker bytet måste ha fått en bekräftelse på sin bokade tid för att släppas in (gäller även barn). Barn under 6 år är välkomna på passen från kl. 12:00 och framåt, de måste också föranmälas. Om barn följer med är det viktigt för oss att ni har uppsikt över dem — det är inte okej att de hänger kvar vid leksakerna och leker där medan ni själva shoppar på andra ställen.
 
 Vi har öppet mellan 9:00–17:00. Shoppingtiden per bokat pass är 75 minuter (t.ex. 11:00–12:15). Vi släpper dock in nya shoppare varje hel timme: 9:00, 10:00, 11:00, 12:00 och så vidare.
 
