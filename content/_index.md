@@ -21,7 +21,7 @@ bilder:
   - src: gubbis1.jpg
     bildtext: Bord med sorterade leksaker och kläder på Gubbängens Barnklädesbyte, med en banderoll med föreningens namn i taket
   - src: bb5aaa04-676c-422d-9461-99c90fc78fe3.jpg
-    bildtext: 'Bildkollage från klädbytet: gosedjur, sällskapsspel, böcker, lekfordon och heminredning'
+    bildtext: 'Bildkollage från klädbytet: Pussel & spel, skor, leksaker och inredning'
 date: 2026-08-30
 ---
 
