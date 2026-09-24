@@ -1,8 +1,9 @@
 ---
-title: "Om oss"
-date: 2026-08-30
+title: Om oss
 draft: false
-description: "Gubbängens Barnklädesbyte grundades 1978 och är idag en av södra Stockholms mest populära secondhand-loppisar för barn."
+description: Gubbängens Barnklädesbyte grundades 1978 och är idag en av södra Stockholms mest populära secondhand-loppisar för barn.
+bilder: []
+date: 2026-08-30
 ---
 
 1978 bildades föräldraföreningen i Gubbängen. Syftet var att verka för familjer med barn genom att arbeta för bra barnmiljö i Gubbängen, öka gemenskapen mellan familjer i Gubbängen och att anordna aktiviteter för barn. Det som fortfarande lever kvar från den tiden är Gubbängens barnklädesbyte, en av söderorts populäraste barnloppisar. Något vi såklart är mycket glada och stolta över!
