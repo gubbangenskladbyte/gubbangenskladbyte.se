@@ -27,13 +27,12 @@ Det går även att boka in en "sista-chansen-shopping" söndagen efter bytet, me
 
 Shoppingtiderna bokas via vårt bokningssystem. Bokningen öppnar ungefär en månad innan varje byte — exakt datum och tid annonseras på Facebook, Instagram och här på bloggen.
 
-Vi har ingen kölista. Så snart en tid bokas av dyker den upp igen på bokningssidan som en bokningsbar tid, så gå gärna in med jämna mellanrum och leta efter tider om det inte finns några kvar i den grupp du helst vill boka.
-
 **Gör så här för att boka:**
 
 - Klicka på bokningsknappen nedan
 - Det går att boka max två biljetter åt gången
 - Barn under 6 år kan bokas på passen från kl. 12:00 (undantag barn i sele — de räknas som ett med den som bär det)
 - Bokningen är personlig och QR-koden måste visas upp i dörren på bytet
+- Vi har ingen kölista. Så snart en tid bokas av dyker den upp igen på bokningssidan.
 
 _I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte._
