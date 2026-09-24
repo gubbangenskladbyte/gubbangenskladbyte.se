@@ -18,7 +18,7 @@ varukategorier:
   - Mindre utbud av vuxenkläder
   - Väskor
   - Barnvagnar
-  - Bebissaker (bärsele, skötunderlägg, filtar, bäddset,åkpåse)
+  - Allt till en bebis
 bilder:
   - src: gubbis1.jpg
     bildtext: ''
