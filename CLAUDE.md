@@ -68,13 +68,14 @@ content/
   for-saljare/index.md           # leaf bundle
   bli-medarbetare/index.md       # leaf bundle
   sa-har-funkar-det-att-salja/index.md
+  bokningsinfo/index.md
   boka-shoppingtid/index.md
   blogg/
     _index.md                    # listsida, pagineras
     <slug>/index.md              # ett leaf bundle per inlägg
 ```
 
-- De fem fristående sidorna ligger direkt i content-roten som page
+- De sex fristående sidorna ligger direkt i content-roten som page
   bundles (inte i en gemensam "sidor"-sektion) — de listas aldrig som en
   samling, bara nås via huvudmenyn. Kontaktuppgifter är en sektion i
   Om oss, ingen egen sida — `content/kontakta-oss/` fanns tidigare som
@@ -288,9 +289,9 @@ direkt via shortcode-anrop i `body`, inget behöver listas separat.
 
 `static/admin/config.yml` speglar innehållsmodellen 1:1:
 - **`startsida`** — file collection, en post (`content/_index.md`).
-- **`sidor`** — file collection med fem poster, en per fristående sida.
-  `sa-har-funkar-det-att-salja` och `om-oss` delar fältlista via en
-  YAML-anker (`&sidfalt`/`*sidfalt`, båda har ett `Bilder`-fält).
+- **`sidor`** — file collection med sex poster, en per fristående sida.
+  `sa-har-funkar-det-att-salja`, `om-oss` och `bokningsinfo` delar fältlista via en
+  YAML-anker (`&sidfalt`/`*sidfalt`, alla har ett `Bilder`-fält).
   `bli-medarbetare` och `for-saljare` har egna, enklare fältlistor utan
   `Bilder` (deras bilder kommer via `bildcitat`/`bild`-shortcodes i
   `body` istället, se ovan). `boka-shoppingtid` har sin egen fältlista

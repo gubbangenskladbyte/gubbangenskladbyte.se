@@ -101,6 +101,12 @@ collections:
         media_folder: ""
         public_folder: ""
         fields: *sidfalt
+      - name: "bokningsinfo"
+        label: "Bokningsinfo"
+        file: "content/bokningsinfo/index.md"
+        media_folder: ""
+        public_folder: ""
+        fields: *sidfalt
       - name: "boka-shoppingtid"
         label: "Boka shoppingtid"
         file: "content/boka-shoppingtid/index.md"

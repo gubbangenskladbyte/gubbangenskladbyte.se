@@ -42,6 +42,10 @@ timeZone = "Europe/Stockholm"
     pageRef = "/om-oss"
     weight = 50
   [[menu.main]]
+    name = "Bokningsinfo"
+    pageRef = "/bokningsinfo"
+    weight = 55
+  [[menu.main]]
     name = "Boka shoppingtid"
     pageRef = "/boka-shoppingtid"
     weight = 60
