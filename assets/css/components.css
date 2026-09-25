@@ -169,7 +169,8 @@
 }
 
 .page__body::after,
-.post__body::after {
+.post__body::after,
+.startbilder::after {
   content: "";
   display: table;
   clear: both;
@@ -197,12 +198,30 @@
   border-radius: var(--radius);
 }
 
+/* figure-variant (med bildtext): bredd/float/marginal sitter på figure
+   via .bild--*-klasserna, bilden fyller figuren */
+.bild__img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.bild__caption {
+  margin-top: var(--space-1);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
 .bild--small {
   width: 8rem;
 }
 
 .bild--medium {
   width: 16rem;
+}
+
+.bild--medium-large {
+  width: 32rem;
 }
 
 .bild--large {
@@ -222,6 +241,11 @@
 .bild--center {
   display: block;
   margin: var(--space-4) auto;
+}
+
+/* startsidans bilder-lista (bild-partial utanför .Content) */
+.startbilder {
+  margin-top: var(--space-4);
 }
 
 /* citat-shortcode */

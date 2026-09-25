@@ -88,7 +88,7 @@ därmed i drift.
 ### SEO
 - [x] Alt-text i galleribilder — `bilder`-fältets `bildtext`
       återanvänds nu som `alt`, både i `partial "galleri.html"` och på
-      startsidan
+      startsidan (där även som synlig bildtext via `partial "bild.html"`)
 - [x] `og:image` för länkförhandsvisning (sidans egen bild →
       startsidans banner → loggan som sista fallback)
 - [x] `Sitemap:`-rad tillagd i `robots.txt`

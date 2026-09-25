@@ -24,6 +24,8 @@ bilder:
     bildtext: ''
   - src: bb5aaa04-676c-422d-9461-99c90fc78fe3.jpg
     bildtext: 'Bildkollage från klädbytet: Pussel & spel, skor, leksaker och inredning'
+    storlek: mellanstor
+    position: center
 date: 2026-08-30
 ---
 

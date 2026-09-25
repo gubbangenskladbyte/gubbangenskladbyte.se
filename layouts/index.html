@@ -36,5 +36,11 @@
 </section>
 
 {{ $extra := where $bilder "src" "not in" (slice "gubbis1.jpg" "gubbis2.jpg") }}
-{{ partial "galleri.html" (dict "page" . "bilder" $extra) }}
+{{ with $extra }}
+<div class="startbilder">
+  {{ range . }}
+  {{ partial "bild.html" (dict "page" $ "src" .src "storlek" .storlek "position" .position "alt" .bildtext "bildtext" .bildtext) }}
+  {{ end }}
+</div>
+{{ end }}
 {{ end }}

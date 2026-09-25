@@ -24,7 +24,7 @@ Den enda sidan i den här gruppen. Hero-rubrik, ingress, introtext,
 listan med varukategorier ("Vad kan du hitta hos oss?") och bilder.
 
 **Sidor**
-De fem fristående sidorna som nås via huvudmenyn (kontaktuppgifter är en
+De sex fristående sidorna som nås via huvudmenyn (kontaktuppgifter är en
 del av Om oss, ingen egen sida):
 
 | Sida | Extra fält utöver Titel/Beskrivning/Innehåll |
@@ -33,6 +33,7 @@ del av Om oss, ingen egen sida):
 | Bli medarbetare | — (bilder infogas i Innehåll via **Bilder + citat**-knappen) |
 | För säljare | — (bilder infogas i Innehåll via **Bild**/**Bilder + citat**-knapparna) |
 | Om oss | **Bilder** |
+| Bokningsinfo | **Bilder** |
 | Boka shoppingtid | **Bokningslänk (alf.io)** + **Bokningsknapp aktiv** (se nedan) |
 
 **Blogg**
@@ -54,7 +55,7 @@ webadressen) utöver de vanliga fälten.
   inte på själva sidan.
 - **Bilder** — finns bara på sidor som listar flera bilder i ett
   bildgalleri (Startsida, "Så här funkar det att sälja", Om oss,
-  Blogg). Se nästa avsnitt. På Bli medarbetare/För säljare infogas
+  Bokningsinfo, Blogg). Se nästa avsnitt. På Bli medarbetare/För säljare infogas
   bilder istället direkt i löptexten via knapparna i verktygsfältet
   (se "Citat, kartor och andra knappar" nedan).
 - **Innehåll** — själva brödtexten, skriven i markdown (se
@@ -67,6 +68,12 @@ Ladda upp bilder direkt i **Bilder**-fältet på respektive sida/inlägg
 i ett bildgalleri längst ner på sidan, i den ordning du lägger till
 dem. Varje bild kan få en **Bildtext** (visas under bilden som en
 liten, gråtonad rad).
+
+**Startsidan är ett undantag:** där har varje bild i Bilder-fältet
+(utom bannerbilden överst, som alltid är fullbredd) även **Storlek**
+och **Position** — samma val som bild-knappen i löptexten (se nedan).
+Bilderna visas under varukategorierna, var för sig, med bildtexten
+under.
 
 Vill du istället ha en bild inne **i löptexten** — mindre, med text
 som flyter runt den (som Human Bridge-loggan på "Så här funkar det att
@@ -143,10 +150,13 @@ du:
 
 - laddar upp (eller väljer) bilden,
 - skriver en alt-text (beskrivning för skärmläsare),
-- väljer **Storlek**: `liten`, `medium` (standard) eller `stor`,
+- väljer **Storlek**: `liten`, `medium` (standard), `mellanstor`
+  (ungefär halva sidbredden) eller `stor` (hela bredden),
 - väljer **Position**: `vänster`, `center` (standard) eller `höger` —
   vänster och höger gör att texten flyter runt bilden, center centrerar
-  den fristående.
+  den fristående,
+- skriver valfritt en **Bildtext** — visas som en liten gråtonad rad
+  under bilden. Lämna tomt om du inte vill ha någon.
 
 Bilden infogas där markören stod. Klicka på den infogade bilden igen
 för att ändra storlek/position senare.
@@ -156,10 +166,13 @@ för att ändra storlek/position senare.
 
 ```
 {{< bild src="filnamn.jpg" alt="Beskrivning" storlek="liten" position="höger" >}}
+{{< bild src="filnamn.jpg" alt="Beskrivning" storlek="medium" position="center" bildtext="Synlig bildtext" >}}
 ```
 
-Registrerad som en Sveltia CMS "Editor Component" i
-`static/admin/index.html`, renderas av `layouts/shortcodes/bild.html`.
+`bildtext` skrivs bara ut när den är ifylld. Registrerad som en
+Sveltia CMS "Editor Component" i `static/admin/index.html`, renderas
+av `layouts/shortcodes/bild.html` → `layouts/partials/bild.html`
+(samma partial som startsidans bilder använder).
 `src` kan vara antingen ett bundle-relativt filnamn eller en extern
 URL.
 </details>

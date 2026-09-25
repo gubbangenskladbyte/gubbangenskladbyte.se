@@ -1,0 +1,32 @@
+{{/* Delas av bild-shortcoden och startsidans bilder-lista.
+     Anropas med (dict "page" . "src" ... "storlek" ... "position" ... "alt" ...),
+     plus valfri "bildtext" som visas som synlig figcaption under bilden. */}}
+{{ $page := .page }}
+{{ $src := .src }}
+{{ $alt := .alt | default "" }}
+
+{{ $storlekar := dict "liten" "small" "medium" "medium" "mellanstor" "medium-large" "stor" "large" }}
+{{ $positioner := dict "vänster" "left" "center" "center" "höger" "right" }}
+
+{{ $storlek := index $storlekar (.storlek | default "medium") | default "medium" }}
+{{ $position := index $positioner (.position | default "center") | default "center" }}
+
+{{ $url := "" }}
+{{ if or (hasPrefix $src "http://") (hasPrefix $src "https://") }}
+  {{ $url = $src }}
+{{ else }}
+  {{ with $page.Resources.GetMatch $src }}{{ $url = .RelPermalink }}{{ end }}
+{{ end }}
+
+{{ if $url }}
+{{ with .bildtext }}
+<figure class="bild bild--{{ $storlek }} bild--{{ $position }}">
+  <img class="bild__img" src="{{ $url }}" alt="{{ $alt }}" loading="lazy">
+  <figcaption class="bild__caption">{{ . }}</figcaption>
+</figure>
+{{ else }}
+<img src="{{ $url }}" alt="{{ $alt }}" class="bild bild--{{ $storlek }} bild--{{ $position }}" loading="lazy">
+{{ end }}
+{{ else }}
+{{ warnf "bild: hittar ingen bildresurs som matchar %q på sidan %q" $src $page.File.Path }}
+{{ end }}

@@ -37,12 +37,17 @@ Bygget skriver till `public/` (gitignorat).
   deras `alt`-text hämtas från matchande `bildtext` i `.Params.bilder`
   — samma fält som redaktören redan fyller i i CMS:et. Eventuella
   ytterligare bilder i `bilder`-listan (utöver de två namngivna)
-  renderas via `partial "galleri.html"`, precis som på andra sidor —
-  en bild som laddas upp men inte listas i `bilder` visas alltså
-  **inte** på startsidan heller (det stämmer nu även i praktiken, inte
-  bara i teorin).
+  renderas via `partial "bild.html"` (samma som `bild`-shortcoden)
+  i en `.startbilder`-container med clearfix — varje post i
+  startsidans `bilder` har därför även `storlek`/`position`-fält
+  (samma värden som shortcoden) och bildtexten visas som synlig
+  `figcaption`. Övriga sidor använder fortfarande `partial
+  "galleri.html"` för sina `bilder`, utan de fälten. Precis som där
+  gäller att en bild som laddas upp men inte listas i `bilder`
+  **inte** visas på startsidan.
 - `layouts/partials/` innehåller `head.html` (meta/OG/CSS-pipeline),
-  `header.html`, `footer.html`, samt `svensk-datum.html` — en liten
+  `header.html`, `footer.html`, `galleri.html`, `bild.html` (se
+  `bild`-shortcoden nedan), samt `svensk-datum.html` — en liten
   hjälppartial som formaterar datum med svenska månadsnamn, eftersom
   Hugos inbyggda `.Date.Format` inte lokaliserar månadsnamn för den här
   sajtens konfiguration.
@@ -120,7 +125,8 @@ Domänfält som förekommer:
 - `bilder` — valfri lista med bilder på sidor/inlägg (widget i Sveltia
   CMS för att kunna ladda upp bilder till bundlen). Varje post har ett
   `src` (bundle-relativt filnamn ELLER en extern URL) och ett valfritt
-  `bildtext`-fält. `partial "galleri.html"` (se nedan) itererar
+  `bildtext`-fält (startsidans poster har även `storlek`/`position`,
+  se `layouts/index.html` ovan). `partial "galleri.html"` (se nedan) itererar
   `bilder`-listan direkt som källa till sanning — det är inte en
   passiv bildruta som råkar plocka upp allt i bundlen; en bild som
   laddas upp men inte listas i `bilder` visas inte.
@@ -161,9 +167,17 @@ tack vare `| default` i shortcode-templaten).
 
 ```
 {{< bild src="filnamn.jpg" storlek="liten" position="höger" alt="Alt-text" >}}
+{{< bild src="filnamn.jpg" alt="Alt-text" storlek="medium" position="center" bildtext="Synlig bildtext" >}}
 ```
 
-- `storlek`: `liten` (8rem) / `medium` (16rem, standard) / `stor` (100%)
+- `bildtext` (valfri): synlig `figcaption` under bilden. Till skillnad
+  från övriga parametrar är den **frivillig även i CMS-`pattern`**
+  (optional grupp i regexen, och `toBlock` skriver bara ut den när den
+  är ifylld) — befintliga anrop utan `bildtext` behövde därför inte
+  uppdateras.
+
+- `storlek`: `liten` (8rem) / `medium` (16rem, standard) /
+  `mellanstor` (32rem) / `stor` (100%)
 - `position`: `vänster` / `center` (standard) / `höger` — vänster/höger
   floatar bilden så text flyter runt den, center gör den till ett
   centrerat block
@@ -175,10 +189,17 @@ tack vare `| default` i shortcode-templaten).
 - **Containern som `.Content` renderas i måste ha en clearfix**
   (`::after { content:""; display:table; clear:both; }`) annars läcker
   en flytande `bild` ut ur artikeln och överlappar det som kommer
-  efter. Alla tre ställen `.Content` renderas (`.page__body`,
-  `.post__body`, startsidans `.intro .page__body`) har den — kom ihåg
+  efter. Alla ställen `.Content` renderas (`.page__body`,
+  `.post__body`, startsidans `.intro .page__body`) har den, liksom
+  startsidans `.startbilder` — kom ihåg
   att lägga till den på nya containrar också.
-- CSS: `.bild`, `.bild--small/medium/large`, `.bild--left/center/right`
+- CSS: `.bild`, `.bild--small/medium/medium-large/large`, `.bild--left/center/right`
+- Logiken ligger i `layouts/partials/bild.html`; shortcoden är bara
+  ett tunt skal runt den så att startsidans `bilder`-lista kan
+  återanvända samma rendering. Partialen tar även en valfri
+  `bildtext`: då renderas en `<figure class="bild ...">` med
+  `figcaption` istället för en ren `<img>` (både startsidan och
+  shortcodens `bildtext`-parameter använder detta).
 
 ### `karta` — interaktiv Google Maps-inbäddning
 

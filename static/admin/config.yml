@@ -50,6 +50,8 @@ collections:
             fields:
               - { label: "Bild", name: "src", widget: "image" }
               - { label: "Bildtext", name: "bildtext", widget: "string", required: false }
+              - { label: "Storlek", name: "storlek", widget: "select", options: ["liten", "medium", "mellanstor", "stor"], default: "medium", required: false, hint: "Gäller inte bannerbilden (gubbis1.jpg), som alltid visas i full bredd." }
+              - { label: "Position", name: "position", widget: "select", options: ["vänster", "center", "höger"], default: "center", required: false, hint: "Gäller inte bannerbilden (gubbis1.jpg)." }
           - { label: "Innehåll", name: "body", widget: "markdown", i18n: false }
 
   - name: "sidor"
