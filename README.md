@@ -76,8 +76,7 @@ Bilderna visas under varukategorierna, var för sig, med bildtexten
 under.
 
 Vill du istället ha en bild inne **i löptexten** — mindre, med text
-som flyter runt den (som Human Bridge-loggan på "Så här funkar det att
-sälja") — se avsnittet om `bild`-shortcoden nedan.
+som flyter runt den — se avsnittet om `bild`-shortcoden nedan.
 
 ### Citat, kartor och andra knappar i verktygsfältet
 

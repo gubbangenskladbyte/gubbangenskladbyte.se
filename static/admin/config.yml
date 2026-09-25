@@ -24,8 +24,6 @@ i18n:
 collections:
   - name: "startsida"
     label: "Startsida"
-    editor:
-      preview: false
     files:
       - name: "startsida"
         label: "Startsida"
@@ -56,8 +54,6 @@ collections:
 
   - name: "sidor"
     label: "Sidor"
-    editor:
-      preview: false
     files:
       - name: "sa-har-funkar-det-att-salja"
         label: "Så här funkar det att sälja"
