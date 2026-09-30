@@ -7,16 +7,14 @@ bokning_aktiv: true
 date: 2026-08-30
 ---
 
-## Bokning
+## Så bokar du din shoppingtid
 
-Shoppingtiderna bokas via vårt bokningssystem. 
+Shoppingtiderna bokas via vårt bokningssystem.
 
-**Gör så här för att boka:**
-
-- Klicka på bokningsknappen nedan
-- Det går att boka max två biljetter åt gången
-- Barn under 6 år kan bokas på passen från kl. 12:00 (undantag barn i sele — de räknas som ett med den som bär det)
-- Bokningen är personlig och QR-koden måste visas upp i dörren på bytet
-- Vi har ingen kölista. Så snart en tid bokas av dyker den upp igen på bokningssidan.
+- Klicka på **bokningsknappen nedan**.
+- Du kan boka **max två biljetter åt gången**.
+- **Barn under 6 år** kan bokas på passen från kl. 12:00 och framåt. Barn i sele räknas som **en person tillsammans med den som bär barnet** och behöver därför ingen egen biljett.
+- Biljetten är **personlig** och QR-koden måste visas upp i dörren när du kommer till bytet.
+- Vi har **ingen kölista**. Om en bokad tid avbokas blir den automatiskt tillgänglig igen på bokningssidan.
 
 _I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte._
