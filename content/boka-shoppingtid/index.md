@@ -16,5 +16,6 @@ Shoppingtiderna bokas via vårt bokningssystem.
 - **Barn under 6 år** kan bokas på passen från kl. 12:00 och framåt. Barn i sele räknas som **en person tillsammans med den som bär barnet** och behöver därför ingen egen biljett.
 - Biljetten är **personlig** och QR-koden måste visas upp i dörren när du kommer till bytet.
 - Vi har **ingen kölista**. Om en bokad tid avbokas blir den automatiskt tillgänglig igen på bokningssidan.
+- Då det är många som vill komma så får man vänta till kl 15:00 med att boka ett andra varv.
 
 _I och med att du bokar en plats blir du medlem hos Gubbängens barnklädesbyte._
