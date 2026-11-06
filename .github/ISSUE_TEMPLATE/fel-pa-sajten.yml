@@ -1,0 +1,22 @@
+name: Fel på sajten
+description: Något ser fel ut eller fungerar inte på gubbangenskladbyte.se
+labels: [bug]
+body:
+  - type: input
+    id: sida
+    attributes:
+      label: Vilken sida?
+      placeholder: https://gubbangenskladbyte.se/...
+    validations:
+      required: true
+  - type: textarea
+    id: beskrivning
+    attributes:
+      label: Vad händer, och vad borde hända?
+    validations:
+      required: true
+  - type: input
+    id: enhet
+    attributes:
+      label: Enhet och webbläsare
+      placeholder: t.ex. iPhone/Safari, Windows/Chrome

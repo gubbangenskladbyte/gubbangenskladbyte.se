@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # Håller actions i .github/workflows/ uppdaterade (t.ex. actions/checkout)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

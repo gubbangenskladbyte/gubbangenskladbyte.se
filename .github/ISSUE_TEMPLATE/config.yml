@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Frågor om klädbytet, försäljning eller bokning
+    url: https://gubbangenskladbyte.se/om-oss/
+    about: Kontakta föreningen direkt — issues här gäller bara webbplatsen.
+  - name: Rapportera en säkerhetsbrist
+    url: https://github.com/gubbangenskladbyte/gubbangenskladbyte.se/security/advisories/new
+    about: Rapportera säkerhetsproblem privat, inte som ett publikt issue.

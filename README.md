@@ -504,3 +504,10 @@ och "Event Custom CSS" — under en egen sektion med scriptets
   utkast läste `scriptEvent.form`/`scriptEvent.bindingResult` och
   kraschade i produktion med `Cannot read property "email" from
   undefined` — koden nedan använder `form`/`bindingResult` direkt.
+
+## Licens
+
+Källkoden är licensierad under [MIT](LICENSE). Licensen gäller **inte**
+innehållet i `content/` (texter, foton, logotyp) eller föreningens namn —
+där förbehålls alla rättigheter. Säkerhetsproblem rapporteras enligt
+[SECURITY.md](SECURITY.md).

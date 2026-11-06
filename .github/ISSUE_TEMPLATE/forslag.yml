@@ -1,0 +1,15 @@
+name: Förslag på förbättring
+description: Idé om ny funktion eller ändring på webbplatsen eller i CMS:et
+labels: [enhancement]
+body:
+  - type: textarea
+    id: forslag
+    attributes:
+      label: Vad vill du ändra eller lägga till?
+    validations:
+      required: true
+  - type: textarea
+    id: varfor
+    attributes:
+      label: Varför?
+      description: Vilket problem löser det, för besökare eller redaktörer?
