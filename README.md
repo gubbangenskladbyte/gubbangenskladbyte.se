@@ -507,7 +507,9 @@ och "Event Custom CSS" — under en egen sektion med scriptets
 
 ## Licens
 
-Källkoden är licensierad under [MIT](LICENSE). Licensen gäller **inte**
-innehållet i `content/` (texter, foton, logotyp) eller föreningens namn —
-där förbehålls alla rättigheter. Säkerhetsproblem rapporteras enligt
+Copyright Gubbängens Barnklädesbyte, alla rättigheter förbehållna — se
+[LICENSE](LICENSE). Det gäller både källkod och innehåll (texter, foton,
+logotyp). Att repot är publikt betyder inte att något i det får
+återanvändas. Sveltia CMS, som laddas externt under `/admin/`, har sin
+egen MIT-licens. Säkerhetsproblem rapporteras enligt
 [SECURITY.md](SECURITY.md).
